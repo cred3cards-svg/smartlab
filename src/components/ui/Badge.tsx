@@ -25,8 +25,27 @@ export function Badge({ children, variant = "info", className }: BadgeProps) {
   );
 }
 
-export function DiscountBadge({ percent }: { percent: number }) {
-  return <Badge variant="discount">{percent}% OFF</Badge>;
+export function DiscountBadge({ 
+  percent, 
+  size = "md" 
+}: { 
+  percent: number; 
+  size?: "sm" | "md" | "lg" 
+}) {
+  const sizeClasses = {
+    sm: "text-[10px] px-2 py-0.5",
+    md: "text-xs px-2.5 py-1",
+    lg: "text-sm px-3 py-1.5",
+  };
+
+  return (
+    <Badge 
+      variant="discount" 
+      className={cn("font-bold tracking-tight", sizeClasses[size])}
+    >
+      {percent}% OFF
+    </Badge>
+  );
 }
 
 export function ReportTimeBadge({ time }: { time: string }) {
