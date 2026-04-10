@@ -15,6 +15,10 @@ export async function GET(request: Request) {
     }
 
     const account = await ReferralService.getOrCreateAccount(phone);
+    if (!account) {
+      return NextResponse.json({ error: "Could not create or find account" }, { status: 500 });
+    }
+
     return NextResponse.json({
       code: account.referralCode?.code,
       phone: account.phone
