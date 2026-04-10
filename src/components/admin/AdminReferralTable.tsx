@@ -9,16 +9,39 @@ export default function AdminReferralTable() {
 
   useEffect(() => {
     async function fetchRewards() {
-      // Mocking admin fetch for now as it usually requires auth session
-      const res = await fetch("/api/admin/referrals"); // Note: Need to create this route
-      if (res.ok) {
-        setRewards(await res.json());
+      setLoading(true);
+      try {
+        const res = await fetch("/api/admin/referrals");
+        if (res.ok) {
+          setRewards(await res.json());
+        }
+      } catch (err) {
+        console.error("Failed to load rewards:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
-    // fetchRewards();
-    setLoading(false); // Mocked for demonstration
+    fetchRewards();
   }, []);
+
+  const handleStatusUpdate = async (id: string, newStatus: string) => {
+    try {
+      const res = await fetch(`/api/admin/referrals/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (res.ok) {
+        const updated = await res.json();
+        setRewards((prev) => 
+          prev.map((r) => (r.id === id ? { ...r, status: updated.status } : r))
+        );
+      }
+    } catch (err) {
+      console.error("Failed to update status:", err);
+    }
+  };
 
   if (loading) return <div>Loading records...</div>;
 
@@ -86,8 +109,18 @@ export default function AdminReferralTable() {
                 <td className="px-6 py-4 text-right">
                   {r.status === 'PENDING' && (
                     <div className="flex justify-end gap-2">
-                      <button className="px-3 py-1 bg-blue-600 text-white rounded-lg font-bold text-xs hover:bg-blue-700">Approve</button>
-                      <button className="px-3 py-1 border border-gray-200 rounded-lg font-bold text-xs hover:bg-gray-50">Reject</button>
+                      <button 
+                        onClick={() => handleStatusUpdate(r.id, 'APPROVED')}
+                        className="px-3 py-1 bg-blue-600 text-white rounded-lg font-bold text-xs hover:bg-blue-700"
+                      >
+                        Approve
+                      </button>
+                      <button 
+                        onClick={() => handleStatusUpdate(r.id, 'REJECTED')}
+                        className="px-3 py-1 border border-gray-200 rounded-lg font-bold text-xs hover:bg-gray-50"
+                      >
+                        Reject
+                      </button>
                     </div>
                   )}
                 </td>
