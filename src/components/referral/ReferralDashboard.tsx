@@ -28,7 +28,7 @@ export default function ReferralDashboard({ phone }: { phone: string }) {
       } catch (err) {
         console.error("Failed to fetch referral stats", err);
       } finally {
-        setLoading(setStats && false);
+        setLoading(false);
       }
     }
     if (phone) fetchStats();

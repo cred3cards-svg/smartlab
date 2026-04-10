@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
-import { Pool } from "@neondatabase/serverless";
+
 
 const prismaClientSingleton = () => {
   const connectionString = process.env.DATABASE_URL;
@@ -9,8 +9,7 @@ const prismaClientSingleton = () => {
     throw new Error("DATABASE_URL is not set");
   }
   
-  const pool = new Pool({ connectionString });
-  const adapter = new PrismaNeon(pool);
+  const adapter = new PrismaNeon({ connectionString });
   
   return new PrismaClient({ adapter });
 };

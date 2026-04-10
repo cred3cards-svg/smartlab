@@ -1,5 +1,5 @@
 import db from "@/lib/db";
-import { BookingStatus, PaymentStatus, Gender } from "@prisma/client";
+import { BookingStatus, PaymentStatus, Gender, ReferralStatus } from "@prisma/client";
 import { CouponService } from "./coupon.service";
 import { SlotService } from "./slot.service";
 import { ReferralService } from "./referral.service";
@@ -70,14 +70,16 @@ export class BookingService {
     let referralEventData = null;
     if (input.referralCode) {
       const refVal = await ReferralService.validateReferral(input.referralCode, input.patient.phone);
-      if (refVal.valid) {
+      if (refVal.valid && refVal.referrerId) {
         // Ensure the referred user has an account too
         const referredAccount = await ReferralService.getOrCreateAccount(input.patient.phone, input.patient.name);
-        referralEventData = {
-          referrerId: refVal.referrerId!,
-          referredUserId: referredAccount.id,
-          status: "PENDING"
-        };
+        if (referredAccount) {
+          referralEventData = {
+            referrerId: refVal.referrerId,
+            referredUserId: referredAccount.id,
+            status: ReferralStatus.PENDING
+          };
+        }
       }
     }
 
