@@ -32,9 +32,9 @@ import PackageCard from "@/components/cards/PackageCard";
 import { CONTACT, BRAND } from "@/lib/constants";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

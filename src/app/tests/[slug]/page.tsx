@@ -30,9 +30,9 @@ import { CONTACT, BRAND, PRICING, ADDRESS } from "@/lib/constants";
 import Script from "next/script";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
