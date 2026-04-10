@@ -1,11 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import db from "@/lib/db";
 
 export async function PATCH(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params;
     const { status } = await request.json();
 
     if (!["APPROVED", "REJECTED"].includes(status)) {
@@ -13,7 +14,7 @@ export async function PATCH(
     }
 
     const reward = await db.rewardLedger.update({
-      where: { id: params.id },
+      where: { id },
       data: { status }
     });
 

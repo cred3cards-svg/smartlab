@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { BookingService } from "@/services/booking.service";
 import { BookingStatus } from "@prisma/client";
 import { z } from "zod";
@@ -12,11 +12,11 @@ const UpdateStatusSchema = z.object({
  * Fetch detailed booking information.
  */
 export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params;
+    const { id } = await context.params;
     const booking = await BookingService.getBooking(id);
 
     if (!booking) {
@@ -35,11 +35,11 @@ export async function GET(
  * Updates the booking status (Administrative).
  */
 export async function PATCH(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params;
+    const { id } = await context.params;
     const body = await request.json();
     const result = UpdateStatusSchema.safeParse(body);
 
