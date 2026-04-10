@@ -6,6 +6,7 @@ import { X, ChevronDown, MapPin, ShoppingCart, Phone, Menu } from "lucide-react"
 import { Logo } from "@/components/ui/Logo";
 import SearchBar from "@/components/ui/SearchBar";
 import Button from "@/components/ui/Button";
+import { CONTACT } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
@@ -23,9 +24,9 @@ const NAV_ITEMS = [
 
 const CITIES = [
   { name: "Kolkata", status: "active" },
-  { name: "Bangalore", status: "soon" },
   { name: "Goa", status: "soon" },
-  { name: "Guwahati", status: "soon" },
+  { name: "Belagavi", status: "soon" },
+  { name: "North East", status: "soon" },
 ];
 
 export default function Header() {
@@ -144,11 +145,11 @@ export default function Header() {
             <div className="flex items-center gap-2 ml-auto lg:ml-0">
               {/* Support */}
               <a
-                href="tel:1800-266-2247"
+                href={`tel:${CONTACT.phone}`}
                 className="hidden lg:flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-brand-blue transition-colors px-2 py-1.5 rounded-lg hover:bg-surface-soft"
               >
                 <Phone size={15} />
-                <span>1800-266-2247</span>
+                <span>{CONTACT.phone_display}</span>
               </a>
 
               {/* Cart */}

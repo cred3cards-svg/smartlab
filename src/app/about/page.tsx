@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const TEAM = [
   { name: "Dr. Arvind Krishnamurthy", role: "Founder & CEO", bg: "bg-brand-blue", initials: "AK", note: "Ex-Apollo Diagnostics, IIT Bombay · 18 years in pathology & health-tech" },
   { name: "Dr. Sunitha Rao", role: "Chief Pathologist", bg: "bg-brand-teal", initials: "SR", note: "MBBS, MD Pathology · Former HOD, CMC Vellore · 22 years clinical pathology" },
-  { name: "Vikram Anand", role: "CTO", bg: "bg-purple-600", initials: "VA", note: "Ex-Flipkart Engineering, IIT Delhi · Built AI infrastructure at scale" },
+  { name: "Vikram Anand", role: "CTO", bg: "bg-purple-600", initials: "VA", note: "Ex-Flipkart Engineering, Top Tier Institute · Built AI infrastructure at scale" },
   { name: "Priya Menon", role: "VP Operations", bg: "bg-brand-green", initials: "PM", note: "Ex-1mg, Practo · Led logistics across 12 cities" },
 ];
 
@@ -97,9 +97,10 @@ export default function AboutPage() {
             {[
               { year: "Jan 2024", event: "SMARTLAB247 incorporated. Research and platform development begins." },
               { year: "Jun 2024", event: "AI pattern-flagging module finalized. Lab infrastructure audits completed." },
-              { year: "Dec 2024", event: "Partnership with NABL-accredited diagnostic networks finalized for West Bengal." },
+              { year: "Dec 2024", event: "Partnership with NABL-accredited diagnostic networks finalized for Kolkata & Districts." },
               { year: "Apr 2026", event: "SMARTLAB247 Kolkata Launch: Salt Lake, New Town, and 20+ other areas." },
-              { year: "2026 →", event: "Expansion planned for Bangalore, Goa, Guwahati and other major cities." },
+              { year: "2026 Q3", event: "Expansion planned for Goa and Belagavi." },
+              { year: "2026 Q4", event: "Launch across North East India hubs (Guwahati, Shillong, Agartala)." },
             ].map(({ year, event }) => (
               <div key={year} className="flex gap-6 items-start">
                 <div className="w-12 h-12 rounded-full bg-brand-blue text-white font-bold text-xs flex items-center justify-center flex-shrink-0 z-10 text-center leading-tight">

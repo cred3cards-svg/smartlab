@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { Phone, Mail, MapPin, Globe, ExternalLink, Share2, Play } from "lucide-react";
+import { CONTACT, ADDRESS, BRAND } from "@/lib/constants";
 
 const FOOTER_LINKS = {
   "Tests & Checkups": [
@@ -34,9 +35,9 @@ const FOOTER_LINKS = {
   ],
   "Cities": [
     { label: "Kolkata", href: "/city/kolkata" },
-    { label: "Bangalore (Soon)", href: "#" },
     { label: "Goa (Soon)", href: "#" },
-    { label: "Guwahati (Soon)", href: "#" },
+    { label: "Belagavi (Soon)", href: "#" },
+    { label: "North East (Soon)", href: "#" },
   ],
 };
 
@@ -75,19 +76,34 @@ export default function Footer() {
             </div>
 
             {/* Contact info */}
-            <div className="space-y-2.5 text-sm">
-              <a href="tel:1800-266-2247" className="flex items-center gap-2.5 text-white/70 hover:text-white transition-colors">
-                <Phone size={15} className="text-brand-teal flex-shrink-0" />
-                <span>1800-266-2247 (Toll Free)</span>
+            <div className="flex flex-col gap-4">
+              <a href={`tel:${CONTACT.phone}`} className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-brand-teal group-hover:text-white transition-all text-white/70">
+                  <Phone size={18} />
+                </div>
+                <div>
+                  <p className="text-[10px] text-white/40 uppercase font-bold tracking-wider">Toll-Free Helpline</p>
+                  <p className="text-sm text-white/80 font-semibold">{CONTACT.phone_display}</p>
+                </div>
               </a>
-              <a href="mailto:support@smartlab247.com" className="flex items-center gap-2.5 text-white/70 hover:text-white transition-colors">
-                <Mail size={15} className="text-brand-teal flex-shrink-0" />
-                <span>support@smartlab247.com</span>
+              <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-brand-teal group-hover:text-white transition-all text-white/70">
+                  <Mail size={18} />
+                </div>
+                <div>
+                  <p className="text-[10px] text-white/40 uppercase font-bold tracking-wider">Email Support</p>
+                  <p className="text-sm text-white/80 font-semibold">{CONTACT.email}</p>
+                </div>
               </a>
-              <p className="flex items-start gap-2.5 text-white/70">
-                <MapPin size={15} className="text-brand-teal flex-shrink-0 mt-0.5" />
-                <span>SMARTLAB247 Health Pvt. Ltd., Salt Lake, Kolkata, WB — 700091</span>
-              </p>
+              <div className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/70">
+                  <MapPin size={18} />
+                </div>
+                <div>
+                  <p className="text-[10px] text-white/40 uppercase font-bold tracking-wider">Kolkata Office</p>
+                  <p className="text-sm text-white/80 font-semibold">{ADDRESS.head_office}</p>
+                </div>
+              </div>
             </div>
 
             {/* Social links */}
@@ -163,7 +179,7 @@ export default function Footer() {
 
             <div className="text-center md:text-right">
               <p className="text-sm text-white/60">
-                Available 6 AM – 6 PM · 7 days a week · Launching in Kolkata
+                Available 6 AM – 6 PM · 7 days a week · Serving Kolkata
               </p>
               <p className="text-xs text-white/40 mt-1">
                 Sample collection in 60 min · Reports in 6–36 hours
@@ -178,7 +194,7 @@ export default function Footer() {
         <div className="container-site py-5">
           <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/40">
             <p>
-              © {new Date().getFullYear()} SMARTLAB247 Health Pvt. Ltd. All rights reserved. CIN: U74999KA2024PTC000001
+              © {new Date().getFullYear()} {BRAND.full_name}. All rights reserved. CIN: U74999KA2024PTC000001
             </p>
             <div className="flex flex-wrap justify-center md:justify-end gap-x-4 gap-y-1">
               {LEGAL_LINKS.map((l) => (

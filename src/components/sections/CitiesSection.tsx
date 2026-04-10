@@ -34,7 +34,7 @@ export default function CitiesSection() {
         <div className="mt-8 text-center">
           <div className="inline-flex items-center gap-2 bg-surface-soft border border-surface-border rounded-full px-5 py-2.5 text-sm text-text-secondary">
             <span>Coming soon:</span>
-            <span className="font-medium text-text-primary">Pune · Chennai · Kolkata · Ahmedabad · Kochi</span>
+            <span className="font-medium text-text-primary">Kolkata · Goa · Belagavi · Guwahati · Shillong</span>
           </div>
           <div className="mt-4">
             <Link href="/centres" className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-teal hover:text-brand-teal-dark transition-colors">

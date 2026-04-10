@@ -1,215 +1,208 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, Star, Sparkles, Users, Clock, Home, Shield, ArrowRight, Zap } from "lucide-react";
-import { MEMBERSHIP_PLANS } from "@/data/index";
+import { 
+  Check, 
+  Zap, 
+  Users, 
+  Clock, 
+  Calendar, 
+  ShieldCheck, 
+  Sparkles,
+  ArrowRight,
+  TrendingUp,
+  MessageSquare,
+  Gift
+} from "lucide-react";
+import { MEMBERSHIP_PLANS } from "@/data";
 import { formatPrice } from "@/lib/utils";
 import Button from "@/components/ui/Button";
+import { BRAND, CONTACT } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "SMARTPASS247 — Annual Health Membership | Free Home Collections & Extra Savings",
-  description:
-    "SMARTPASS247 annual membership: free home collections, 20–25% extra off tests, priority slots, AI trend reports, and family coverage. Starting ₹999/year.",
+  title: `SMARTPASS247 Health Membership — Save More on Every Test | ${BRAND.name}`,
+  description: "Join India's most rewarding health membership. Extra 20% off on all tests, free home collections, priority slots, and AI-powered health trends.",
 };
 
-const COMPARE_FEATURES = [
-  { label: "Home Collection Charges", without: "₹99 per visit", solo: "12 free/year", family: "48 free/year", senior: "24 free/year" },
-  { label: "Test Discounts", without: "Listed price", solo: "+20% off", family: "+25% off", senior: "+20% off" },
-  { label: "Priority Morning Slots", without: "❌", solo: "✓", family: "✓", senior: "✓" },
-  { label: "Members Covered", without: "1", solo: "1", family: "Up to 4", senior: "Up to 2" },
-  { label: "AI Trend Reports", without: "Basic", solo: "✓ Full AI", family: "✓ Full AI", senior: "✓ Full AI" },
-  { label: "Annual Reminders", without: "❌", solo: "✓", family: "✓ per member", senior: "✓" },
-  { label: "Dedicated Support", without: "General", solo: "Priority line", family: "Relationship manager", senior: "Priority line" },
-  { label: "Report SLA", without: "Standard", solo: "6 hrs max", family: "6 hrs max", senior: "8 hrs max" },
+const COMPARISON_FEATURES = [
+  { label: "Home Collection Charges", guest: "₹99 per visit", member: "Always FREE" },
+  { label: "Additional Discount", guest: "None", member: "Extra 20-25% OFF" },
+  { label: "Booking Slots", guest: "Standard", member: "Priority Morning Slots" },
+  { label: "Report Turnaround", guest: "Standard", member: "Fast-Track (6 hrs)" },
+  { label: "Health Insights", guest: "Standard PDF", member: "AI Trends & Insights" },
+  { label: "Family Coverage", guest: "Individual only", member: "Up to 4 Members" },
 ];
 
 export default function SmartPassPage() {
   return (
-    <>
-      {/* Hero */}
-      <section
-        className="relative overflow-hidden py-20"
-        style={{ background: "linear-gradient(135deg, #0B3C5D 0%, #082D46 60%, #00565A 100%)" }}
-      >
-        <div className="absolute inset-0 opacity-5"
-          style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-        <div className="container-site relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 bg-yellow-400/15 border border-yellow-400/30 rounded-full px-5 py-2 mb-6 text-sm font-semibold text-yellow-300">
-            <Sparkles size={16} />
-            Annual Health Membership
-          </div>
-          <h1 className="font-heading font-bold text-white mb-4" style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
-            SMARTPASS<span className="text-brand-teal">247</span>
-          </h1>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto mb-3 leading-relaxed">
-            Your complete annual health partner. Free home collections, extra discounts, priority slots, AI trend reports — for you or your whole family.
-          </p>
-          <p className="text-brand-teal font-bold text-xl mb-10">Starting at just ₹999/year</p>
+    <div className="bg-white min-h-screen">
+      {/* Hero Section */}
+      <section className="relative pt-16 pb-24 overflow-hidden bg-brand-blue text-white">
+        <div className="absolute inset-0 opacity-10 pointer-events-none" 
+          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
+        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-teal/20 via-transparent to-transparent pointer-events-none" />
 
-          <div className="flex flex-wrap justify-center gap-3 mb-10">
-            {["Free Home Collections", "Extra 20–25% Off", "Priority Slots", "AI Trend Reports", "Family Coverage"].map((f) => (
-              <span key={f} className="flex items-center gap-1.5 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm text-white/85 font-medium">
-                <Check size={13} className="text-brand-green" />
-                {f}
-              </span>
+        <div className="container-site relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-8 text-sm font-bold uppercase tracking-widest text-brand-teal">
+            <Zap size={14} fill="currentColor" />
+            Priority Health Access
+          </div>
+          <h1 className="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight">
+            Meet <span className="text-brand-teal italic">SMARTPASS247</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-10 leading-relaxed italic">
+            India&apos;s most rewarding health membership. Designed to make high-quality diagnostics <span className="text-white font-bold underline decoration-brand-teal">unbelievably affordable.</span>
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="px-10 h-14 text-lg shadow-teal">View Plans ↓</Button>
+            <Button size="lg" variant="outline" className="px-10 h-14 text-lg border-white/20 hover:bg-white/10">Why Join?</Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Grid */}
+      <section className="py-20 bg-surface-soft">
+        <div className="container-site">
+          <div className="text-center mb-16">
+            <h2 className="font-heading font-bold text-3xl text-text-primary mb-4 italic">Exclusive Member Benefits</h2>
+            <p className="text-text-muted max-w-2xl mx-auto">One membership, countless reasons to choose SMARTLAB247 for your family wellness.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: Gift, title: "FREE Home Collection", desc: "Save ₹99 on every single visit. Zero minimum order value for members." },
+              { icon: TrendingUp, title: "Extra 20-25% OFF", desc: "Over and above our daily discounts. The lowest prices in the market, guaranteed." },
+              { icon: Clock, title: "Priority Slots", desc: "Get early morning slots (6-8 AM) even during peak seasons for the fastest reporting." },
+              { icon: Sparkles, title: "AI Health Trends", desc: "Advanced report analysis with historical trend charts and lifestyle insight markers." },
+              { icon: MessageSquare, title: "Report Helpline", desc: "Dedicated dietitian and doctor-support line to help explain your report findings." },
+              { icon: Users, title: "Family Sharing", desc: "One pass for your entire family (up to 4 members) including parents and children." },
+              { icon: ShieldCheck, title: "Lab Excellence", desc: "Priority processing in our NABL-certified automated diagnostic pipelines." },
+              { icon: Calendar, title: "Wellness Reminders", desc: "Personalized health calendar that alerts you when it's time for repeat tests." },
+            ].map((benefit, i) => (
+              <div key={i} className="bg-white p-6 rounded-3xl border border-surface-border hover:shadow-xl transition-all group">
+                <div className="w-12 h-12 rounded-2xl bg-brand-teal-pale text-brand-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <benefit.icon size={24} />
+                </div>
+                <h3 className="font-bold text-lg text-text-primary mb-2 italic">{benefit.title}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed">{benefit.desc}</p>
+              </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Plan cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      {/* Pricing Section */}
+      <section className="py-24" id="plans">
+        <div className="container-site">
+          <div className="text-center mb-16">
+            <h2 className="font-heading font-bold text-3xl text-text-primary mb-4 italic">Choose Your SMARTPASS247</h2>
+            <p className="text-text-muted">Flexible plans designed for individuals, seniors, and families.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {MEMBERSHIP_PLANS.map((plan) => (
-              <div
-                key={plan.id}
-                className={`rounded-2xl overflow-hidden ${plan.popular
-                  ? "bg-white shadow-2xl scale-[1.03] border-2 border-brand-teal"
-                  : "bg-white/8 border border-white/15"
+              <div 
+                key={plan.id} 
+                className={`relative flex flex-col p-8 rounded-[40px] border shadow-sm transition-all hover:shadow-2xl ${
+                  plan.popular ? "border-brand-teal ring-4 ring-brand-teal/5 bg-white" : "border-surface-border bg-white"
                 }`}
               >
                 {plan.popular && (
-                  <div className="bg-brand-teal text-white text-xs font-bold text-center py-2 tracking-wider">
-                    ⭐ MOST POPULAR
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-teal text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
+                    MOST POPULAR
                   </div>
                 )}
-                <div className={`p-6 ${plan.popular ? "" : ""}`}>
-                  <h2 className={`font-heading font-bold text-lg mb-1 ${plan.popular ? "text-brand-blue" : "text-white"}`}>
-                    {plan.name}
-                  </h2>
-                  <p className={`text-sm mb-4 ${plan.popular ? "text-text-muted" : "text-white/60"}`}>{plan.tagline}</p>
+                
+                <div className="mb-8">
+                  <h3 className="font-heading font-bold text-2xl text-text-primary mb-2 italic">{plan.name}</h3>
+                  <p className="text-sm text-text-muted h-10">{plan.tagline}</p>
+                </div>
 
-                  <div className="mb-5">
-                    <div className="flex items-end gap-2">
-                      <span className={`font-heading font-bold text-3xl ${plan.popular ? "text-brand-blue" : "text-white"}`}>
-                        {formatPrice(plan.price)}
-                      </span>
-                      <span className={`text-sm mb-1 ${plan.popular ? "text-text-muted" : "text-white/50"}`}>/year</span>
-                    </div>
-                    <p className={`text-xs line-through mt-0.5 ${plan.popular ? "text-text-muted" : "text-white/30"}`}>
-                      {formatPrice(plan.originalPrice)}
-                    </p>
+                <div className="mb-8">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-extrabold text-brand-blue italic">{formatPrice(plan.price)}</span>
+                    <span className="text-text-muted font-medium italic">/year</span>
                   </div>
-
-                  <ul className="space-y-2.5 mb-6">
-                    {plan.benefits.slice(0, 6).map((b) => (
-                      <li key={b} className={`flex items-start gap-2 text-sm ${plan.popular ? "text-text-secondary" : "text-white/70"}`}>
-                        <Check size={14} className="text-brand-green flex-shrink-0 mt-0.5" />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Button
-                    variant={plan.popular ? "secondary" : "outline"}
-                    fullWidth
-                    size="md"
-                    className={!plan.popular ? "border-white/30 text-white hover:bg-white/10" : ""}
-                  >
-                    <Sparkles size={15} />
-                    Get {plan.name.replace("SMARTPASS247 ", "")}
-                  </Button>
-
-                  <p className={`text-xs text-center mt-3 ${plan.popular ? "text-text-muted" : "text-white/40"}`}>
-                    ₹{Math.round(plan.price / 12)}/month · Cancel anytime
-                  </p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-sm text-text-muted line-through">{formatPrice(plan.originalPrice)}</span>
+                    <span className="text-xs font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-lg italic">Save {(100 - (plan.price/plan.originalPrice*100)).toFixed(0)}%</span>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Benefits detail */}
-      <section className="section bg-white">
-        <div className="container-site">
-          <div className="text-center mb-12">
-            <h2 className="font-heading font-bold text-2xl md:text-3xl text-text-primary mb-3">
-              Everything a SMARTPASS247 Member Gets
-            </h2>
-            <p className="text-text-muted max-w-xl mx-auto">
-              More than just discounts — SMARTPASS247 is your proactive health partnership.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Home, title: "Free Home Collections", desc: "Up to 48 free home collection visits per year. No ₹99 fee every time.", color: "text-brand-teal", bg: "bg-brand-teal-pale" },
-              { icon: Star, title: "Extra 20–25% Off Tests", desc: "Every test and package gets an additional member-only discount on top of listed savings.", color: "text-orange-500", bg: "bg-orange-50" },
-              { icon: Clock, title: "Priority Morning Slots", desc: "6–8 AM slots reserved for SMARTPASS247 members before general availability opens.", color: "text-brand-blue", bg: "bg-blue-50" },
-              { icon: Zap, title: "AI Trend Reports", desc: "Longitudinal trend charts for all repeat parameters. See how your health moves over time.", color: "text-purple-600", bg: "bg-purple-50" },
-              { icon: Users, title: "Family Coverage", desc: "Family plan covers up to 4 members. Individual dashboards, reminders, and benefits per person.", color: "text-pink-600", bg: "bg-pink-50" },
-              { icon: Shield, title: "Wellness Calendar", desc: "Personalized annual health calendar with smart reminders for when to repeat each test.", color: "text-brand-green", bg: "bg-green-50" },
-            ].map(({ icon: Icon, title, desc, color, bg }) => (
-              <div key={title} className="bg-surface-soft rounded-2xl p-6 border border-surface-border">
-                <div className={`w-12 h-12 rounded-xl ${bg} flex items-center justify-center mb-4`}>
-                  <Icon size={22} className={color} />
-                </div>
-                <h3 className="font-semibold text-text-primary text-base mb-2">{title}</h3>
-                <p className="text-sm text-text-muted leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Comparison table */}
-      <section className="section bg-surface-soft">
-        <div className="container-site">
-          <div className="text-center mb-10">
-            <h2 className="font-heading font-bold text-2xl text-text-primary mb-2">
-              Compare Plans
-            </h2>
-          </div>
-
-          <div className="overflow-x-auto rounded-2xl border border-surface-border shadow-card">
-            <table className="w-full bg-white text-sm" role="table">
-              <thead>
-                <tr className="border-b border-surface-border">
-                  <th className="text-left p-4 text-text-muted font-semibold text-xs uppercase tracking-wider w-40">Feature</th>
-                  <th className="p-4 text-center text-text-secondary font-semibold">Without PASS</th>
-                  {MEMBERSHIP_PLANS.map((p) => (
-                    <th key={p.id} className={`p-4 text-center font-bold ${p.popular ? "text-brand-teal bg-brand-teal-pale" : "text-brand-blue"}`}>
-                      {p.popular && <span className="block text-[10px] mb-1 text-brand-teal">POPULAR</span>}
-                      {p.name.replace("SMARTPASS247 ", "")}
-                      <span className="block text-xs font-normal text-text-muted mt-0.5">{formatPrice(p.price)}/yr</span>
-                    </th>
+                <div className="flex-1 space-y-4 mb-8">
+                  {plan.benefits.map((benefit, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div className="w-5 h-5 rounded-full bg-brand-teal flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Check size={12} className="text-white" />
+                      </div>
+                      <span className="text-sm text-text-secondary leading-snug">{benefit}</span>
+                    </div>
                   ))}
+                </div>
+
+                <Button 
+                  fullWidth 
+                  size="lg" 
+                  variant={plan.popular ? "teal" : "outline"}
+                  className="rounded-2xl h-14 text-base font-bold italic"
+                >
+                  Get Started <ArrowRight size={18} className="ml-2" />
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Table */}
+      <section className="py-20 bg-surface-soft border-t border-surface-border">
+        <div className="container-site max-w-4xl">
+          <div className="text-center mb-12">
+            <h2 className="font-heading font-bold text-3xl text-text-primary italic">Member vs Guest</h2>
+            <p className="text-text-muted mt-2 uppercase tracking-widest text-[10px] font-bold">The smart choice for diagnostics</p>
+          </div>
+
+          <div className="bg-white rounded-3xl border border-surface-border overflow-hidden shadow-sm">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-surface-soft border-b border-surface-border">
+                  <th className="px-6 py-5 text-left text-sm font-bold text-text-primary italic">Feature</th>
+                  <th className="px-6 py-5 text-center text-sm font-bold text-text-muted uppercase tracking-wider">Guest</th>
+                  <th className="px-6 py-5 text-center text-sm font-bold text-brand-teal uppercase tracking-wider bg-brand-teal/5">Member</th>
                 </tr>
               </thead>
-              <tbody>
-                {COMPARE_FEATURES.map((row, i) => (
-                  <tr key={row.label} className={i % 2 === 0 ? "bg-white" : "bg-surface-soft/50"}>
-                    <td className="p-4 font-medium text-text-primary text-xs">{row.label}</td>
-                    <td className="p-4 text-center text-text-muted text-xs">{row.without}</td>
-                    <td className="p-4 text-center text-brand-blue font-semibold text-xs">{row.solo}</td>
-                    <td className="p-4 text-center text-brand-teal font-semibold text-xs bg-brand-teal-pale/30">{row.family}</td>
-                    <td className="p-4 text-center text-brand-green font-semibold text-xs">{row.senior}</td>
+              <tbody className="divide-y divide-surface-border text-sm">
+                {COMPARISON_FEATURES.map((feature, i) => (
+                  <tr key={i} className="hover:bg-surface-soft transition-colors font-medium italic">
+                    <td className="px-6 py-4 text-text-secondary">{feature.label}</td>
+                    <td className="px-6 py-4 text-center text-text-muted">{feature.guest}</td>
+                    <td className="px-6 py-4 text-center text-brand-blue font-bold bg-brand-teal/5">{feature.member}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+
+          <p className="text-center text-xs text-text-muted mt-8 max-w-md mx-auto leading-relaxed">
+            *Memberships are valid for 12 months from the date of purchase. Extra discounts apply on top of prevailing website prices.
+          </p>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="section bg-brand-blue text-center">
-        <div className="container-site max-w-2xl">
-          <Sparkles size={36} className="text-yellow-300 mx-auto mb-4" />
-          <h2 className="font-heading font-bold text-white text-2xl md:text-3xl mb-3">
-            Start Your SMARTPASS247 Journey
-          </h2>
-          <p className="text-white/70 mb-8">
-            Join 50,000+ members who get smarter, faster, more affordable diagnostics — year-round.
-          </p>
+      {/* FAQ Teaser */}
+      <section className="py-20">
+        <div className="container-site text-center">
+          <p className="text-text-muted mb-6 italic">Still have questions about SMARTPASS247?</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="secondary" size="xl" leftIcon={<Sparkles size={18} />}>
-              Get Solo Plan — ₹999/yr
-            </Button>
-            <Button size="xl" className="bg-white text-brand-blue hover:bg-white/90">
-              Get Family Plan — ₹2,499/yr
-            </Button>
+            <Link href="/faq">
+              <Button variant="outline" size="lg" className="px-8 italic">Read Membership FAQs</Button>
+            </Link>
+            <Link href={`tel:${CONTACT.phone}`}>
+              <Button variant="ghost" size="lg" className="px-8 italic">Call Concierge: {CONTACT.phone_display}</Button>
+            </Link>
           </div>
-          <p className="text-white/40 text-sm mt-5">Cancel anytime · No auto-renewal without consent · Full refund within 7 days</p>
         </div>
       </section>
-    </>
+    </div>
   );
 }
