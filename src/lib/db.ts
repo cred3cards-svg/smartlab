@@ -5,8 +5,14 @@ import { PrismaNeon } from "@prisma/adapter-neon";
 
 const prismaClientSingleton = () => {
   const connectionString = process.env.DATABASE_URL;
+  
   if (!connectionString) {
-    throw new Error("DATABASE_URL is not set");
+    // Only throw in production runtime. During build/dev, we can fallback to a placeholder
+    // to prevent build-time crashes during static analysis.
+    if (process.env.NODE_ENV === "production" && !process.env.NEXT_PHASE) {
+      throw new Error("DATABASE_URL is not set");
+    }
+    return new PrismaClient();
   }
   
   const adapter = new PrismaNeon({ connectionString });
