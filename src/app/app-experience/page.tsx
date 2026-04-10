@@ -4,7 +4,7 @@ import {
   Smartphone, 
   Bell, 
   FileText, 
-  TrendUp, 
+  TrendingUp, 
   Users, 
   ShieldCheck, 
   Download,
@@ -106,7 +106,7 @@ export default function AppExperiencePage() {
                 desc: "Never lose a report again. Every test you've ever taken at SMARTLAB247 is available for instant download."
               },
               {
-                icon: TrendUp,
+                icon: TrendingUp,
                 title: "Smart Health Trends",
                 desc: "See how your parameters (like Cholesterol or HbA1c) have moved over the years with AI trend charts."
               },
