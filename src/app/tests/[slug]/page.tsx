@@ -20,7 +20,7 @@ import {
   MapPin,
   Phone
 } from "lucide-react";
-import { getTestBySlug as getStaticTestBySlug, TESTS } from "@/data/tests";
+import { getTestBySlug, TESTS } from "@/data/tests";
 import { TestService } from "@/services/test.service";
 import { formatPrice } from "@/lib/utils";
 import Button from "@/components/ui/Button";

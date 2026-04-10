@@ -1,19 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { 
-  Building2, 
-  Users, 
-  MapPin, 
-  CheckCircle2, 
-  ShieldCheck, 
-  FileText, 
-  BarChart3,
-  Calendar,
-  Zap,
-  ArrowRight,
-  TrendingUp,
-  Award
-} from "lucide-react";
+import { Building2, Users, MapPin, CheckCircle2, ShieldCheck, FileText, BarChart3, Calendar, Zap, ArrowRight, TrendingUp, Award, Home } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { BRAND, CONTACT } from "@/lib/constants";
 
