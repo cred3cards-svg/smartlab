@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { Copy, Share2, Award, Users, TrendingUp } from "lucide-react";
 
 interface ReferralStats {
@@ -47,15 +48,23 @@ export default function ReferralDashboard({ phone }: { phone: string }) {
 
   return (
     <div className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-blue-900/5 overflow-hidden">
-      {/* Header */}
-      <div className="p-8 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
-        <div className="flex items-center gap-3 mb-2">
-          <Award className="w-6 h-6 text-blue-200" />
-          <h2 className="text-xl font-bold">Refer & Earn</h2>
+      {/* Header Banner */}
+      <div className="relative w-full h-48 sm:h-64">
+        <Image 
+          src="/images/smartlab_image_6.png" 
+          alt="Refer and Earn" 
+          fill 
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 to-transparent flex flex-col justify-end p-8 text-white">
+          <div className="flex items-center gap-3 mb-2">
+            <Award className="w-6 h-6 text-blue-200" />
+            <h2 className="text-2xl font-bold">Refer & Earn</h2>
+          </div>
+          <p className="text-blue-100 text-sm opacity-90 max-w-sm">
+            Share your code and unlock rewards for every friend who completes a checkup.
+          </p>
         </div>
-        <p className="text-blue-100 text-sm opacity-90">
-          Share your code and unlock rewards for every friend who completes a checkup.
-        </p>
       </div>
 
       <div className="p-8 space-y-8">

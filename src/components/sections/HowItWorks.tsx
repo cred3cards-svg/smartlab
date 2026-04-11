@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Search, Home, Microscope, FileText } from "lucide-react";
 
 const STEPS = [
@@ -70,6 +71,18 @@ export default function HowItWorks() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Feature Image */}
+        <div className="mt-20 max-w-5xl mx-auto hidden md:block opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]">
+          <div className="relative w-full aspect-[21/9] rounded-[2rem] overflow-hidden shadow-modal border border-surface-border">
+            <Image 
+              src="/images/smartlab_image_2.png" 
+              alt="SMARTLAB247 seamless process" 
+              fill 
+              className="object-cover"
+            />
           </div>
         </div>
       </div>

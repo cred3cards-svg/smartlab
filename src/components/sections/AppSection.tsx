@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
 import { Smartphone, Download, Bell, TrendingUp, Users, FileText, ArrowRight } from "lucide-react";
 
@@ -59,78 +62,15 @@ export default function AppSection() {
               </Link>
             </div>
 
-            {/* Right: app mockup (SVG-drawn) */}
+            {/* Right: Feature Image */}
             <div className="flex items-center justify-center">
-              <div className="relative">
-                {/* Phone frame */}
-                <div className="w-56 h-96 bg-gray-900 rounded-[2.5rem] p-2.5 shadow-2xl border-2 border-gray-700">
-                  <div className="bg-white rounded-[2rem] h-full overflow-hidden">
-                    {/* Status bar */}
-                    <div className="bg-brand-blue px-4 py-3 flex items-center justify-between">
-                      <span className="text-white text-xs font-medium">SMARTLAB247</span>
-                      <div className="w-4 h-4 rounded-full bg-white/30" />
-                    </div>
-
-                    {/* App content */}
-                    <div className="p-3 bg-surface-soft h-full">
-                      <p className="text-xs font-bold text-text-primary mb-2">My Reports</p>
-
-                      {/* Report cards */}
-                      {[
-                        { name: "CBC", date: "12 Apr", status: "Ready", color: "bg-green-100 text-green-700" },
-                        { name: "Lipid Profile", date: "5 Apr", status: "Ready", color: "bg-green-100 text-green-700" },
-                        { name: "Thyroid Panel", date: "15 Mar", status: "Ready", color: "bg-green-100 text-green-700" },
-                      ].map((r) => (
-                        <div key={r.name} className="bg-white rounded-xl p-2.5 mb-2 flex items-center justify-between shadow-sm border border-surface-border">
-                          <div>
-                            <p className="text-xs font-semibold text-text-primary">{r.name}</p>
-                            <p className="text-[10px] text-text-muted">{r.date}</p>
-                          </div>
-                          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${r.color}`}>{r.status}</span>
-                        </div>
-                      ))}
-
-                      {/* Mini chart */}
-                      <div className="bg-white rounded-xl p-2.5 shadow-sm border border-surface-border mt-3">
-                        <p className="text-[10px] font-bold text-text-primary mb-2">Haemoglobin Trend</p>
-                        <div className="flex items-end gap-1 h-10">
-                          {[60, 70, 85, 80, 90, 95].map((h, i) => (
-                            <div key={i} className="flex-1 bg-brand-teal/40 rounded-t" style={{ height: `${h}%` }} />
-                          ))}
-                        </div>
-                        <div className="flex justify-between text-[8px] text-text-muted mt-1">
-                          <span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating notification */}
-                <div className="absolute -right-8 top-16 bg-white rounded-2xl shadow-card p-3 w-44 border border-surface-border">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-brand-teal-pale flex items-center justify-center">
-                      <Bell size={14} className="text-brand-teal" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-semibold text-text-primary">Report Ready!</p>
-                      <p className="text-[9px] text-text-muted">CBC delivered in 5h 42m</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating family badge */}
-                <div className="absolute -left-8 bottom-20 bg-white rounded-2xl shadow-card p-3 w-36 border border-surface-border">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center">
-                      <Users size={14} className="text-purple-600" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-semibold text-text-primary">4 Members</p>
-                      <p className="text-[9px] text-text-muted">SMARTPASS247</p>
-                    </div>
-                  </div>
-                </div>
+              <div className="relative w-full max-w-sm aspect-[9/16] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-gray-900">
+                <Image 
+                  src="/images/smartlab_image_4.png" 
+                  alt="SMARTLAB247 App Preview" 
+                  fill 
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
