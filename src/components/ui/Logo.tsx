@@ -39,7 +39,7 @@ export function Logo({
       style={{ height, width }}
     >
       <Image
-        src="/images/logo.png"
+        src="/images/smart247.png"
         alt="SMARTLAB247"
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
