@@ -1,3 +1,5 @@
+"use client";
+
 import { Search, Home, Microscope, FileText } from "lucide-react";
 
 const STEPS = [
