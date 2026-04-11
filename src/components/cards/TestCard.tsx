@@ -25,7 +25,7 @@ export default function TestCard({ test, compact = false }: TestCardProps) {
 
   return (
     <Link href={`/tests/${test.slug}`} className="block group">
-      <div className="bg-white rounded-2xl border border-surface-border shadow-card card-hover p-4 flex flex-col h-full relative overflow-hidden">
+      <div className="bg-white rounded-2xl md:rounded-[2rem] border border-surface-border shadow-card premium-hover p-5 flex flex-col h-full relative overflow-hidden transition-all duration-300">
         {/* Popular badge */}
         {test.popular && (
           <div className="absolute top-0 right-0">

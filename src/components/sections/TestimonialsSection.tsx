@@ -29,17 +29,17 @@ export default function TestimonialsSection() {
   const next = () => { setCurrent((c) => (c + 1) % total); };
 
   return (
-    <section className="section bg-surface-soft" aria-labelledby="testimonials-heading">
+    <section className="section bg-white" aria-labelledby="testimonials-heading">
       <div className="container-site">
         {/* Testimonials */}
-        <div className="text-center mb-8">
-          <p className="text-brand-teal text-sm font-semibold mb-2 uppercase tracking-wider">Patient Stories</p>
-          <h2 id="testimonials-heading" className="font-heading font-bold text-2xl md:text-3xl text-text-primary">
+        <div className="text-center md:text-left mb-12 max-w-2xl">
+          <p className="text-brand-teal text-sm font-bold mb-3 uppercase tracking-widest">Patient Stories</p>
+          <h2 id="testimonials-heading" className="font-heading font-bold text-3xl md:text-4xl text-text-primary">
             Trusted by Patients Across India
           </h2>
-          <div className="flex items-center justify-center gap-1 mt-2">
+          <div className="flex items-center justify-center md:justify-start gap-1 mt-4">
             {Array.from({ length: 5 }).map((_, i) => (
-              <span key={i} className="text-yellow-400 text-lg">★</span>
+              <span key={i} className="text-yellow-400 text-lg drop-shadow-sm">★</span>
             ))}
             <span className="text-sm font-semibold text-text-secondary ml-2">4.9 / 5 — 12,000+ reviews</span>
           </div>
@@ -87,18 +87,19 @@ export default function TestimonialsSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {DOCTOR_ENDORSEMENTS.map((doc) => (
-              <div key={doc.id} className="bg-white rounded-2xl border border-surface-border p-5 shadow-card">
-                <Quote size={24} className="text-brand-teal/30 mb-3" />
-                <p className="text-sm text-text-secondary leading-relaxed italic mb-4">
+              <div key={doc.id} className="bg-white rounded-[2rem] border border-surface-border p-6 md:p-8 shadow-card premium-hover">
+                <Quote size={28} className="text-brand-teal/20 mb-4" />
+                <p className="text-sm md:text-base text-text-secondary leading-relaxed italic mb-6">
                   &ldquo;{doc.quote}&rdquo;
                 </p>
-                <div className="flex items-center gap-3 pt-3 border-t border-surface-border">
-                  <div className="w-10 h-10 rounded-full bg-brand-blue flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                <div className="flex items-center gap-4 pt-4 border-t border-surface-border">
+                  <div className="w-12 h-12 rounded-full bg-surface-soft flex items-center justify-center text-brand-teal font-bold text-lg flex-shrink-0 border border-surface-border">
                     {doc.initials}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-text-primary">{doc.name}</p>
-                    <p className="text-xs text-text-muted">{doc.specialty} · {doc.hospital}</p>
+                    <p className="text-sm font-bold text-text-primary">{doc.name}</p>
+                    <p className="text-[11px] font-semibold text-text-muted uppercase tracking-wider mt-0.5">{doc.specialty}</p>
+                    <p className="text-xs text-text-muted mt-0.5">{doc.hospital}</p>
                   </div>
                 </div>
               </div>

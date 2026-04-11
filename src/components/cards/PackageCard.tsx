@@ -30,7 +30,7 @@ export default function PackageCard({ pkg, featured = false }: PackageCardProps)
 
   return (
     <Link href={`/checkups/${pkg.slug}`} className="block group">
-      <div className={`bg-white rounded-2xl border shadow-card card-hover flex flex-col h-full overflow-hidden relative ${
+      <div className={`bg-white rounded-[2rem] border shadow-card premium-hover flex flex-col h-full overflow-hidden relative transition-all duration-300 ${
         featured ? "border-brand-teal ring-2 ring-brand-teal/20" : "border-surface-border"
       }`}>
         {/* Recommended ribbon */}

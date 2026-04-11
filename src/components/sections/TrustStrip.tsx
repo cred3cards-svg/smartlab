@@ -1,74 +1,61 @@
-import { Clock, Home, Shield, Award, Zap, Users } from "lucide-react";
-
-const TRUST_ITEMS = [
-  {
-    icon: Clock,
-    value: "6 Hours",
-    label: "Average Report Time",
-    sub: "Most tests delivered same-day",
-    color: "text-brand-teal",
-    bg: "bg-brand-teal-pale",
-  },
-  {
-    icon: Home,
-    value: "60 Min",
-    label: "Home Collection",
-    sub: "SkillMedic™ at your door",
-    color: "text-brand-blue",
-    bg: "bg-blue-50",
-  },
-  {
-    icon: Shield,
-    value: "NABL",
-    label: "Accredited Labs",
-    sub: "ISO 15189 certified process",
-    color: "text-brand-green",
-    bg: "bg-green-50",
-  },
-  {
-    icon: Award,
-    value: "75%",
-    label: "Average Savings",
-    sub: "vs. MRP at clinic labs",
-    color: "text-orange-500",
-    bg: "bg-orange-50",
-  },
-  {
-    icon: Zap,
-    value: "AI",
-    label: "Assisted Pathology",
-    sub: "Intelligent anomaly flagging",
-    color: "text-purple-600",
-    bg: "bg-purple-50",
-  },
-  {
-    icon: Users,
-    value: "2 Lakh+",
-    label: "Patients Served",
-    sub: "Across 6 major cities",
-    color: "text-pink-600",
-    bg: "bg-pink-50",
-  },
-];
+import { Clock, Home, ShieldCheck, Microscope } from "lucide-react";
 
 export default function TrustStrip() {
+  const TRUST_ITEMS = [
+    {
+      icon: Clock,
+      title: "6-Hour Reports",
+      description: "Fastest turnaround with same-day digital delivery.",
+    },
+    {
+      icon: Home,
+      title: "Home Collection",
+      description: "Hygienic sample collection at your door in 60 mins.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "NABL Certified",
+      description: "Strict quality control matching global standards.",
+    },
+    {
+      icon: Microscope,
+      title: "AI Assisted",
+      description: "Enhanced pathological accuracy and early detection.",
+    },
+  ];
+
   return (
-    <section className="bg-white border-b border-surface-border py-10" aria-label="Trust metrics">
+    <section className="section bg-white border-b border-surface-border" aria-label="Trust metrics">
       <div className="container-site">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {TRUST_ITEMS.map(({ icon: Icon, value, label, sub, color, bg }) => (
-            <div
-              key={label}
-              className="flex flex-col items-center text-center p-4 rounded-2xl hover:bg-surface-soft transition-colors"
-            >
-              <div className={`w-11 h-11 rounded-xl ${bg} flex items-center justify-center mb-3`}>
-                <Icon size={20} className={color} />
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <h2 className="font-heading font-bold text-3xl text-text-primary mb-4">
+            Diagnostics You Can Trust
+          </h2>
+          <p className="text-text-secondary">
+            We combined advanced AI pathology with seamless logistics to bring premium healthcare straight to your home.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {TRUST_ITEMS.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={idx}
+                className="bg-surface-soft rounded-[2rem] p-6 border border-surface-border premium-hover text-center flex flex-col items-center"
+              >
+                <div className="w-14 h-14 bg-white shadow-sm rounded-full flex items-center justify-center mb-5">
+                  <Icon size={24} className="text-brand-teal" />
+                </div>
+                <h3 className="font-heading font-semibold text-lg text-text-primary mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-text-muted leading-relaxed">
+                  {item.description}
+                </p>
               </div>
-              <p className={`font-heading font-bold text-xl mb-0.5 ${color}`}>{value}</p>
-              <p className="text-xs font-semibold text-text-primary">{label}</p>
-              <p className="text-[11px] text-text-muted mt-0.5 leading-snug">{sub}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

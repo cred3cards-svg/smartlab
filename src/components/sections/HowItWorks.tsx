@@ -1,72 +1,82 @@
+import { Search, Home, Microscope, FileText } from "lucide-react";
+
 const STEPS = [
   {
     step: "01",
-    title: "Book in 60 Seconds",
-    description: "Search for a test or package, select your slot, add your address, and pay. Done. No queues, no calls needed.",
-    emoji: "📱",
-    color: "bg-brand-teal-pale",
-    accent: "text-brand-teal",
+    title: "Book Online",
+    description: "Select your tests, pick a time, and confirm. No waiting queues or phone calls.",
+    icon: Search,
   },
   {
     step: "02",
-    title: "SkillMedic™ Arrives",
-    description: "A verified, trained SMARTLAB247 SkillMedic™ comes to your home at your chosen time. Single-prick, painless collection.",
-    emoji: "🏠",
-    color: "bg-blue-50",
-    accent: "text-brand-blue",
+    title: "Home Collection",
+    description: "A trained SkillMedic™ arrives at your location for a painless, hygienic sample collection.",
+    icon: Home,
   },
   {
     step: "03",
-    title: "AI-Assisted Testing",
-    description: "Your sample reaches our NABL lab in temperature-controlled transport. Our AI-enhanced workflow processes it at speed.",
-    emoji: "🧬",
-    color: "bg-purple-50",
-    accent: "text-purple-600",
+    title: "Lab Processing",
+    description: "Your sample is processed in NABL-certified labs using cutting-edge AI-assisted technology.",
+    icon: Microscope,
   },
   {
     step: "04",
-    title: "Reports in Hours",
-    description: "Your doctor-reviewed, digitally signed reports are delivered via WhatsApp, email, and your dashboard — in as little as 6 hours.",
-    emoji: "📊",
-    color: "bg-green-50",
-    accent: "text-brand-green",
+    title: "Digital Report",
+    description: "Secure, verified reports delivered straight to your dashboard and email within hours.",
+    icon: FileText,
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section className="section bg-white" aria-labelledby="how-it-works-heading">
+    <section className="section bg-surface-soft" aria-labelledby="how-it-works-heading">
       <div className="container-site">
-        <div className="text-center mb-12">
-          <p className="text-brand-teal text-sm font-semibold mb-2 uppercase tracking-wider">Simple 4-Step Process</p>
-          <h2 id="how-it-works-heading" className="font-heading font-bold text-2xl md:text-3xl text-text-primary">
-            How SMARTLAB247 Works
+        <div className="text-center mb-16 max-w-2xl mx-auto">
+          <p className="text-brand-teal text-sm font-bold mb-3 uppercase tracking-widest">Seamless Process</p>
+          <h2 id="how-it-works-heading" className="font-heading font-bold text-3xl md:text-4xl text-text-primary mb-4">
+            Health Checkups Made <span className="text-brand-teal">Effortless</span>
           </h2>
-          <p className="text-text-muted mt-2 max-w-lg mx-auto">
-            From booking to report — entirely at home, faster than ever.
+          <p className="text-text-secondary text-lg">
+            From booking to clinical insights, experience healthcare the way it should be.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-          {/* Connecting line (desktop) */}
-          <div className="absolute hidden lg:block top-12 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-brand-teal via-brand-blue to-brand-green" />
+        <div className="relative">
+          {/* Subtle horizontal connecting line structure */}
+          <div className="absolute hidden lg:block top-8 left-[10%] right-[10%] h-[1px] bg-surface-border" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {STEPS.map(({ step, title, description, icon: Icon }, idx) => (
+              <div 
+                key={step} 
+                className="group relative flex flex-col items-center text-center opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards]"
+                style={{ animationDelay: `${idx * 0.15}s` }}
+              >
+                {/* Icon Container */}
+                <div className="relative z-10 w-16 h-16 rounded-2xl bg-white border border-surface-border shadow-sm flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:border-brand-teal group-hover:shadow-teal">
+                  <Icon size={24} className="text-brand-blue group-hover:text-brand-teal transition-colors" />
+                  <div className="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-brand-teal text-white text-[10px] font-bold flex items-center justify-center border-2 border-surface-soft">
+                    {step}
+                  </div>
+                </div>
 
-          {STEPS.map(({ step, title, description, emoji, color, accent }) => (
-            <div key={step} className="flex flex-col items-center text-center relative">
-              {/* Step number circle */}
-              <div className={`relative z-10 w-14 h-14 rounded-full ${color} flex items-center justify-center mb-5 border-4 border-white shadow-card`}>
-                <span className="text-2xl">{emoji}</span>
+                <h3 className="font-heading font-bold text-lg text-text-primary mb-3">
+                  {title}
+                </h3>
+                <p className="text-sm text-text-muted leading-relaxed">
+                  {description}
+                </p>
               </div>
-
-              <span className={`text-xs font-bold uppercase tracking-widest ${accent} mb-2`}>
-                Step {step}
-              </span>
-              <h3 className="font-heading font-semibold text-base text-text-primary mb-2">{title}</h3>
-              <p className="text-sm text-text-muted leading-relaxed">{description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </section>
   );
 }

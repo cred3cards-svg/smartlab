@@ -3,7 +3,7 @@ import { Testimonial } from "@/types";
 
 export default function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <div className="bg-white rounded-2xl border border-surface-border shadow-card p-5 flex flex-col gap-4 h-full">
+    <div className="bg-white rounded-[2rem] border border-surface-border shadow-card premium-hover p-6 md:p-8 flex flex-col gap-6 h-full">
       {/* Stars */}
       <div className="flex gap-0.5">
         {Array.from({ length: 5 }).map((_, i) => (
