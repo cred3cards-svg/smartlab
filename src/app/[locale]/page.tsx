@@ -46,7 +46,11 @@ const organizationSchema = {
   ],
 };
 
+import { useTranslations } from "next-intl";
+
 export default function Home() {
+  const tCommon = useTranslations("Common");
+
   return (
     <>
       <Script

@@ -1,0 +1,53 @@
+{
+  "Header": {
+    "bookTest": "टेस्ट बुक करें",
+    "healthPackages": "हेल्थ पैकेज",
+    "faq": "सामान्य प्रश्न",
+    "contact": "संपर्क करें",
+    "login": "लॉग इन",
+    "Tests": "टेस्ट",
+    "Checkups": "चेकअप",
+    "SMARTPASS247": "SMARTPASS247",
+    "Why Us": "हम क्यों",
+    "More": "अधिक",
+    "AI Diagnostics": "AI डायग्नोस्टिक्स",
+    "For Doctors": "डॉक्टरों के लिए",
+    "Corporate": "कॉर्पोरेट",
+    "About": "हमारे बारे में"
+  },
+  "Footer": {
+    "about": "हमारे बारे में",
+    "contact": "संपर्क करें",
+    "terms": "नियम और शर्तें",
+    "privacy": "गोपनीयता नीति"
+  },
+  "Hero": {
+    "eyebrow": "स्मार्ट डायग्नोस्टिक्स, तत्काल देखभाल",
+    "headline": "प्रीमियम हेल्थकेयर, आपके घर तक।",
+    "subheadline": "NABL प्रमाणित सटीकता के साथ AI-संचालित पैथोलॉजी। 60 मिनट में होम सैंपल कलेक्शन बुक करें और 6 घंटे में रिपोर्ट प्राप्त करें।",
+    "searchPlaceholder": "टेस्ट खोजें (उदा. CBC, Vitamin D)...",
+    "findTests": "टेस्ट खोजें"
+  },
+  "Sections": {
+    "trust": "डायग्नोस्टिक्स जिन पर आप भरोसा कर सकते हैं",
+    "mostBooked": "सबसे ज्यादा बुक किए गए",
+    "popularTests": "लोकप्रिय लैब टेस्ट",
+    "viewAllTests": "सभी टेस्ट देखें",
+    "bestValue": "सर्वोत्तम मूल्य",
+    "healthPackages": "हेल्थ चेकअप पैकेज",
+    "viewAllPackages": "सभी पैकेज देखें",
+    "howItWorks": "SMARTLAB247 कैसे काम करता है",
+    "aiAssisted": "स्मार्ट लैब जो आपके साथ सोचती है",
+    "membership": "SMARTPASS247 \u2014 आपका स्वास्थ्य, पूरे वर्ष",
+    "testimonials": "भारत भर के मरीजों का भरोसा",
+    "app": "आपका स्वास्थ्य डैशबोर्ड, आपकी जेब में"
+  },
+  "FAQ": {
+    "heading": "सामान्य प्रश्न (FAQs)",
+    "viewAll": "सभी FAQs देखें"
+  },
+  "Common": {
+    "bookNow": "अभी बुक करें",
+    "learnMore": "और जानें"
+  }
+}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, MapPin, Clock, Home, Shield, Star, Search } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { useTranslations } from "next-intl";
 
 const TRUST_PILLS = [
   { icon: Clock, label: "6Hr Reports" },
@@ -21,6 +22,7 @@ const QUICK_STATS = [
 ];
 
 export default function Hero() {
+  const t = useTranslations("Hero");
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (e: React.FormEvent) => {
@@ -70,7 +72,7 @@ export default function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-teal opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-teal"></span>
             </span>
-            <span className="text-xs uppercase tracking-widest text-white/90 font-bold">Smart Diagnostics, Instant Care</span>
+            <span className="text-xs uppercase tracking-widest text-white/90 font-bold">{t("eyebrow")}</span>
           </div>
 
           {/* Headline */}
@@ -78,13 +80,11 @@ export default function Hero() {
             id="hero-headline"
             className="font-heading font-black text-white mb-6 leading-[1.1] max-w-2xl tracking-tight opacity-0 animate-[fadeInUp_0.6s_ease-out_0.1s_forwards]"
             style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
-          >
-            Premium Healthcare, <br className="hidden md:block"/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal-pale to-brand-teal">Delivered Home.</span>
-          </h1>
+            dangerouslySetInnerHTML={{ __html: t("headline").replace('Delivered Home.', '<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal-pale to-brand-teal">Delivered Home.</span>') }}
+          />
           
           <p className="text-white/80 text-lg md:text-xl font-medium mb-10 max-w-xl opacity-0 animate-[fadeInUp_0.6s_ease-out_0.2s_forwards]">
-            AI-powered pathology with NABL certified accuracy. Book home sample collection in <span className="text-white font-bold">60 minutes</span> and get reports in <span className="text-white font-bold">6 hours</span>.
+            {t("subheadline")}
           </p>
 
           {/* Central Search / Action Box */}
@@ -93,7 +93,7 @@ export default function Hero() {
               <Search className="absolute left-4 text-white/50" size={20} />
               <input 
                 type="text" 
-                placeholder="Search tests (e.g. CBC, Vitamin D)..." 
+                placeholder={t("searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-white/5 text-white placeholder:text-white/40 rounded-xl md:rounded-[1.5rem] py-3.5 pl-12 pr-4 outline-none focus:bg-white/10 focus:ring-2 focus:ring-brand-teal transition-all font-medium text-base md:text-lg"
@@ -105,7 +105,7 @@ export default function Hero() {
               className="rounded-xl md:rounded-[1.5rem] shadow-teal flex-shrink-0 py-3.5"
               onClick={handleSearch}
             >
-              Find Tests <ArrowRight size={18} className="ml-1" />
+              {t("findTests")} <ArrowRight size={18} className="ml-1" />
             </Button>
           </div>
 

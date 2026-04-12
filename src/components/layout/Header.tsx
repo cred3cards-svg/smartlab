@@ -8,6 +8,8 @@ import SearchBar from "@/components/ui/SearchBar";
 import Button from "@/components/ui/Button";
 import { CONTACT } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
 const NAV_ITEMS = [
   { label: "Tests", href: "/tests" },
@@ -30,6 +32,7 @@ const CITIES = [
 ];
 
 export default function Header() {
+  const t = useTranslations("Header");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cartCount] = useState(0);
   const [selectedCity, setSelectedCity] = useState("Kolkata");
@@ -106,7 +109,7 @@ export default function Header() {
                       onClick={() => setMoreOpen(!moreOpen)}
                       className="flex items-center gap-1 text-sm font-medium text-text-secondary hover:text-brand-blue transition-colors px-3 py-2 rounded-lg hover:bg-surface-soft"
                     >
-                      {item.label}
+                      {t(item.label as any) || item.label}
                       <ChevronDown size={14} className={cn("transition-transform", moreOpen && "rotate-180")} />
                     </button>
                     {moreOpen && (
@@ -118,7 +121,7 @@ export default function Header() {
                             onClick={() => setMoreOpen(false)}
                             className="block px-4 py-2.5 text-sm text-text-primary hover:bg-surface-soft hover:text-brand-blue transition-colors"
                           >
-                            {child.label}
+                            {t(child.label as any) || child.label}
                           </Link>
                         ))}
                       </div>
@@ -135,7 +138,7 @@ export default function Header() {
                         : "text-text-secondary hover:text-brand-blue hover:bg-surface-soft"
                     )}
                   >
-                    {item.label}
+                    {t(item.label as any) || item.label}
                   </Link>
                 )
               )}
@@ -143,6 +146,11 @@ export default function Header() {
 
             {/* Right actions */}
             <div className="flex items-center gap-2 ml-auto lg:ml-0">
+              {/* Language Switcher */}
+              <div className="hidden lg:block px-2">
+                <LanguageSwitcher />
+              </div>
+
               {/* Support */}
               <a
                 href={`tel:${CONTACT.phone}`}

@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
+
+import "../globals.css";
 import PromoStrip from "@/components/layout/PromoStrip";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -47,13 +52,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function LocaleLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+  
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+  
+  setRequestLocale(locale);
+  const messages = await getMessages();
+
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang={locale} className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -63,14 +79,16 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body bg-surface text-text-primary antialiased">
-        <PromoStrip />
-        <Header />
-        <main id="main-content" className="pb-16 lg:pb-0">
-          {children}
-        </main>
-        <Footer />
-        <MobileBottomNav />
-        <FloatingWhatsApp />
+        <NextIntlClientProvider messages={messages}>
+          <PromoStrip />
+          <Header />
+          <main id="main-content" className="pb-16 lg:pb-0">
+            {children}
+          </main>
+          <Footer />
+          <MobileBottomNav />
+          <FloatingWhatsApp />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

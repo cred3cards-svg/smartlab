@@ -1,0 +1,53 @@
+{
+  "Header": {
+    "bookTest": "Book Test",
+    "healthPackages": "Health Packages",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "login": "Login",
+    "Tests": "Tests",
+    "Checkups": "Checkups",
+    "SMARTPASS247": "SMARTPASS247",
+    "Why Us": "Why Us",
+    "More": "More",
+    "AI Diagnostics": "AI Diagnostics",
+    "For Doctors": "For Doctors",
+    "Corporate": "Corporate",
+    "About": "About"
+  },
+  "Footer": {
+    "about": "About Us",
+    "contact": "Contact Us",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  },
+  "Hero": {
+    "eyebrow": "Smart Diagnostics, Instant Care",
+    "headline": "Premium Healthcare, Delivered Home.",
+    "subheadline": "AI-powered pathology with NABL certified accuracy. Book home sample collection in 60 minutes and get reports in 6 hours.",
+    "searchPlaceholder": "Search tests (e.g. CBC, Vitamin D)...",
+    "findTests": "Find Tests"
+  },
+  "Sections": {
+    "trust": "Diagnostics You Can Trust",
+    "mostBooked": "Most Booked",
+    "popularTests": "Popular Lab Tests",
+    "viewAllTests": "View All Tests",
+    "bestValue": "Best Value",
+    "healthPackages": "Health Checkup Packages",
+    "viewAllPackages": "View All Packages",
+    "howItWorks": "How SMARTLAB247 Works",
+    "aiAssisted": "Smart Labs That Think With You",
+    "membership": "SMARTPASS247 \u2014 Your Health, All Year",
+    "testimonials": "Trusted by Patients Across India",
+    "app": "Your Health Dashboard, In Your Pocket"
+  },
+  "FAQ": {
+    "heading": "Frequently Asked Questions",
+    "viewAll": "View All FAQs"
+  },
+  "Common": {
+    "bookNow": "Book Now",
+    "learnMore": "Learn More"
+  }
+}

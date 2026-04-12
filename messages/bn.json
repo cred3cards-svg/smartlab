@@ -1,0 +1,53 @@
+{
+  "Header": {
+    "bookTest": "টেস্ট বুক করুন",
+    "healthPackages": "হেলথ প্যাকেজ",
+    "faq": "সাধারণ প্রশ্ন",
+    "contact": "যোগাযোগ করুন",
+    "login": "লগ ইন",
+    "Tests": "টেস্ট",
+    "Checkups": "চেকআপ",
+    "SMARTPASS247": "SMARTPASS247",
+    "Why Us": "আমরা কেন",
+    "More": "আরও",
+    "AI Diagnostics": "AI ডায়াগনস্টিকস",
+    "For Doctors": "ডাক্তারদের জন্য",
+    "Corporate": "কর্পোরেট",
+    "About": "আমাদের সম্পর্কে"
+  },
+  "Footer": {
+    "about": "আমাদের সম্পর্কে",
+    "contact": "যোগাযোগ করুন",
+    "terms": "শর্তাবলী",
+    "privacy": "গোপনীয়তা নীতি"
+  },
+  "Hero": {
+    "eyebrow": "স্মার্ট ডায়াগনস্টিকস, তাৎক্ষণিক সুরক্ষা",
+    "headline": "প্রিমিয়াম হেলথকেয়ার, আপনার বাড়িতে।",
+    "subheadline": "NABL অনুমোদিত নির্ভুলতার সাথে AI-চালিত প্যাথলজি। ৬০ মিনিটের মধ্যে হোম স্যাম্পল সংগ্রহ বুক করুন এবং ৬ ঘণ্টার মধ্যে রিপোর্ট পান।",
+    "searchPlaceholder": "টেস্ট খুঁজুন (যেমন CBC, Vitamin D)...",
+    "findTests": "টেস্ট খুঁজুন"
+  },
+  "Sections": {
+    "trust": "নির্ভরযোগ্য ডায়াগনস্টিকস",
+    "mostBooked": "সর্বাধিক বুক করা",
+    "popularTests": "জনপ্রিয় ল্যাব টেস্ট",
+    "viewAllTests": "সব টেস্ট দেখুন",
+    "bestValue": "সেরা মূল্য",
+    "healthPackages": "হেলথ চেকআপ প্যাকেজ",
+    "viewAllPackages": "সব প্যাকেজ দেখুন",
+    "howItWorks": "SMARTLAB247 কীভাবে কাজ করে",
+    "aiAssisted": "স্মার্ট ল্যাব যা আপনার সাথে ভাবে",
+    "membership": "SMARTPASS247 \u2014 আপনার স্বাস্থ্য, সারা বছর",
+    "testimonials": "ভারত জুড়ে রোগীদের বিশ্বাস",
+    "app": "আপনার হেলথ ড্যাশবোর্ড, আপনার পকেটে"
+  },
+  "FAQ": {
+    "heading": "সাধারণ প্রশ্ন (FAQs)",
+    "viewAll": "সব FAQs দেখুন"
+  },
+  "Common": {
+    "bookNow": "এখনই বুক করুন",
+    "learnMore": "আরও জানুন"
+  }
+}
