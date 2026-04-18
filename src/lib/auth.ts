@@ -3,9 +3,10 @@ import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/db";
 import bcrypt from "bcryptjs";
-import { UserRole } from "@prisma/client";
+import { authConfig } from "./auth.config";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
   providers: [
     Credentials({
@@ -43,7 +44,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           where: { 
             OR: [
               { email: credentials.email as string },
-              { phone: credentials.email as string } // Allow login with phone too
+              { phone: credentials.email as string }
             ]
           },
         });
@@ -71,25 +72,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: "jwt",
   },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.role = (user as any).role;
-        token.sub = user.id; // Map id to sub for clarity
-        token.name = user.name;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (token && session.user) {
-        (session.user as any).role = token.role as UserRole;
-        (session.user as any).id = token.sub as string;
-      }
-      return session;
-    },
-  },
-  pages: {
-    signIn: "/admin/login",
-  },
-  secret: process.env.AUTH_SECRET || "smartlab_dev_secret_2026",
 });

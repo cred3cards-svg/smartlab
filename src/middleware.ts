@@ -1,8 +1,10 @@
 import createMiddleware from 'next-intl/middleware';
 import {routing} from './i18n/routing';
-import { auth } from './lib/auth';
+import NextAuth from "next-auth";
+import { authConfig } from "./lib/auth.config";
 import { NextResponse } from 'next/server';
 
+const { auth } = NextAuth(authConfig);
 const intlMiddleware = createMiddleware(routing);
 
 export default auth((req) => {

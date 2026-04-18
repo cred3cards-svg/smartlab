@@ -1,0 +1,8 @@
+cricket_game/
+smartlab247-mobile/
+prisma/seed-dashboard.ts
+check-prisma.ts
+.env
+.env.local
+node_modules
+.next
