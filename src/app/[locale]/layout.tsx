@@ -10,6 +10,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import FloatingWhatsApp from "@/components/layout/FloatingWhatsApp";
+import { SessionProvider } from "@/components/providers/SessionProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -69,27 +70,17 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="scroll-smooth">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="font-body bg-surface text-text-primary antialiased">
-        <NextIntlClientProvider messages={messages}>
-          <PromoStrip />
-          <Header />
-          <main id="main-content" className="pb-16 lg:pb-0">
-            {children}
-          </main>
-          <Footer />
-          <MobileBottomNav />
-          <FloatingWhatsApp />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <SessionProvider>
+        <PromoStrip />
+        <Header />
+        <main id="main-content" className="pb-16 lg:pb-0">
+          {children}
+        </main>
+        <Footer />
+        <MobileBottomNav />
+        <FloatingWhatsApp />
+      </SessionProvider>
+    </NextIntlClientProvider>
   );
 }

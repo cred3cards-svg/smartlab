@@ -52,7 +52,7 @@ export default function HowItWorks() {
             {STEPS.map(({ step, title, description, icon: Icon }, idx) => (
               <div 
                 key={step} 
-                className="group relative flex flex-col items-center text-center opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards]"
+                className="group relative flex flex-col items-center text-center opacity-0 animate-fade-in-up"
                 style={{ animationDelay: `${idx * 0.15}s` }}
               >
                 {/* Icon Container */}
@@ -75,7 +75,7 @@ export default function HowItWorks() {
         </div>
 
         {/* Feature Image */}
-        <div className="mt-20 max-w-5xl mx-auto hidden md:block opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]">
+        <div className="mt-20 max-w-5xl mx-auto hidden md:block opacity-0 animate-fade-in-up [animation-delay:0.6s]">
           <div className="relative w-full aspect-[21/9] rounded-[2rem] overflow-hidden shadow-modal border border-surface-border">
             <Image 
               src="/images/smartlab_image_2.png" 
@@ -86,12 +86,6 @@ export default function HowItWorks() {
           </div>
         </div>
       </div>
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </section>
   );
 }

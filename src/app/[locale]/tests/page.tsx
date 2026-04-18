@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Search, Filter, SlidersHorizontal, Clock, Home, ChevronRight } from "lucide-react";
-import { TESTS } from "@/data/tests";
+import { prisma } from "@/lib/db";
+import { TestService } from "@/services/test.service";
 import TestCard from "@/components/cards/TestCard";
 import Button from "@/components/ui/Button";
 
@@ -23,7 +24,9 @@ const SORT_OPTIONS = [
   { label: "Discount", value: "discount" },
 ];
 
-export default function TestsPage() {
+export default async function TestsPage() {
+  const tests = await TestService.getAllTests();
+
   return (
     <>
       {/* Page header */}
@@ -133,7 +136,7 @@ export default function TestsPage() {
             {/* Sort + count bar */}
             <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
               <p className="text-sm text-text-muted">
-                Showing <span className="font-semibold text-text-primary">{TESTS.length}</span> tests
+                Showing <span className="font-semibold text-text-primary">{tests.length}</span> tests
                 <span className="mx-1.5 text-surface-border">·</span>
                 <span className="font-medium text-brand-teal">Kolkata</span>
               </p>
@@ -162,7 +165,7 @@ export default function TestsPage() {
 
             {/* Test grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {TESTS.map((test) => (
+              {tests.map((test) => (
                 <TestCard key={test.id} test={test} />
               ))}
             </div>
@@ -172,7 +175,7 @@ export default function TestsPage() {
               <Button variant="outline" size="lg">
                 Load More Tests
               </Button>
-              <p className="text-xs text-text-muted mt-2">Showing {TESTS.length} of 500+ tests</p>
+              <p className="text-xs text-text-muted mt-2">Showing {tests.length} of 500+ tests</p>
             </div>
           </main>
         </div>

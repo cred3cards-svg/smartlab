@@ -175,7 +175,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
               </div>
 
               <div className="divide-y divide-surface-border">
-                {pkg.parameterGroups.map((group, i) => (
+                {pkg.parameterGroups?.map((group, i) => (
                    <div key={i} className="group">
                     <button className="w-full px-6 md:px-8 py-5 flex items-center justify-between hover:bg-surface-soft transition-colors outline-none">
                       <div className="flex items-center gap-4">

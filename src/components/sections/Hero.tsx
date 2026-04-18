@@ -44,12 +44,11 @@ export default function Hero() {
           background: "linear-gradient(135deg, #0B3C5D 0%, #082D46 40%, #0A6064 100%)",
         }}
       >
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full opacity-20"
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full opacity-20 animate-pulse-slow"
           style={{ 
             background: "radial-gradient(circle, #00A8A8, transparent 70%)", 
             transform: "translate(20%, -30%)",
             filter: "blur(60px)",
-            animation: "pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite"
           }} />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full opacity-10"
           style={{ 
@@ -67,7 +66,7 @@ export default function Hero() {
         {/* Left Column: Copy & Search */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
           {/* Premium Eyebrow */}
-          <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-4 py-1.5 mb-8 shadow-modal opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
+          <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-4 py-1.5 mb-8 shadow-modal opacity-0 animate-fade-in">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-teal opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-teal"></span>
@@ -78,17 +77,17 @@ export default function Hero() {
           {/* Headline */}
           <h1
             id="hero-headline"
-            className="font-heading font-black text-white mb-6 leading-[1.1] max-w-2xl tracking-tight opacity-0 animate-[fadeInUp_0.6s_ease-out_0.1s_forwards]"
+            className="font-heading font-black text-white mb-6 leading-[1.1] max-w-2xl tracking-tight opacity-0 animate-fade-in-up [animation-delay:0.1s]"
             style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
             dangerouslySetInnerHTML={{ __html: t("headline").replace('Delivered Home.', '<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal-pale to-brand-teal">Delivered Home.</span>') }}
           />
           
-          <p className="text-white/80 text-lg md:text-xl font-medium mb-10 max-w-xl opacity-0 animate-[fadeInUp_0.6s_ease-out_0.2s_forwards]">
+          <p className="text-white/80 text-lg md:text-xl font-medium mb-10 max-w-xl opacity-0 animate-fade-in-up [animation-delay:0.2s]">
             {t("subheadline")}
           </p>
 
           {/* Central Search / Action Box */}
-          <div className="w-full max-w-xl bg-white/10 backdrop-blur-xl border border-white/20 p-2 rounded-2xl md:rounded-[2rem] shadow-modal mb-10 opacity-0 animate-[fadeInUp_0.6s_ease-out_0.3s_forwards] flex flex-col sm:flex-row gap-2">
+          <div className="w-full max-w-xl bg-white/10 backdrop-blur-xl border border-white/20 p-2 rounded-2xl md:rounded-[2rem] shadow-modal mb-10 opacity-0 animate-fade-in-up [animation-delay:0.3s] flex flex-col sm:flex-row gap-2">
             <form onSubmit={handleSearch} className="flex-1 relative flex items-center">
               <Search className="absolute left-4 text-white/50" size={20} />
               <input 
@@ -110,7 +109,7 @@ export default function Hero() {
           </div>
 
           {/* Trust elements row */}
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 md:gap-6 opacity-0 animate-[fadeIn_0.8s_ease-out_0.5s_forwards]">
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 md:gap-6 opacity-0 animate-fade-in [animation-delay:0.5s]">
             {TRUST_PILLS.map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-2 text-white/90">
                 <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">
@@ -123,7 +122,7 @@ export default function Hero() {
         </div>
 
         {/* Right Column: Image */}
-        <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-modal opacity-0 animate-[fadeIn_0.8s_ease-out_0.6s_forwards]">
+        <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-modal opacity-0 animate-fade-in [animation-delay:0.6s]">
           <Image 
             src="/images/smartlab_image_1.png" 
             alt="SMARTLAB247 Premium Healthcare" 
@@ -135,16 +134,6 @@ export default function Hero() {
 
       </div>
 
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-      `}</style>
     </section>
   );
 }

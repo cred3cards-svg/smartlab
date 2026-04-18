@@ -1,83 +1,61 @@
-"use client";
-
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
-import { ButtonHTMLAttributes, forwardRef } from "react";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "ghost" | "outline" | "danger" | "teal";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  loading?: boolean;
-  fullWidth?: boolean;
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  asChild?: boolean;
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "teal" | "primary";
+  size?: "default" | "sm" | "md" | "lg" | "xl" | "icon";
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  fullWidth?: boolean;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      variant = "primary",
-      size = "md",
-      loading,
-      fullWidth,
-      leftIcon,
-      rightIcon,
-      children,
-      disabled,
-      ...props
-    },
-    ref
-  ) => {
-    const base =
-      "inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none select-none hover:scale-[1.02]";
-
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = "default", size = "default", asChild = false, leftIcon, rightIcon, fullWidth, children, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    
     const variants = {
-      primary:
-        "bg-brand-blue text-white hover:bg-brand-blue-light focus-visible:ring-brand-blue shadow-sm hover:shadow-blue active:scale-[0.98]",
-      secondary:
-        "bg-brand-teal text-white hover:bg-brand-teal-dark focus-visible:ring-brand-teal shadow-sm hover:shadow-teal active:scale-[0.98]",
-      teal: "bg-brand-teal-pale text-brand-teal border border-brand-teal/20 hover:bg-brand-teal hover:text-white focus-visible:ring-brand-teal hover:shadow-teal active:scale-[0.98]",
-      outline:
-        "border-2 border-brand-blue text-brand-blue bg-transparent hover:bg-brand-blue hover:text-white focus-visible:ring-brand-blue hover:shadow-blue active:scale-[0.98]",
-      ghost:
-        "text-text-secondary bg-transparent hover:bg-surface-soft hover:text-text-primary focus-visible:ring-brand-teal hover:scale-100 active:scale-[0.98]",
-      danger:
-        "bg-status-danger text-white hover:opacity-90 focus-visible:ring-status-danger hover:shadow-card-hover active:scale-[0.98]",
+      default: "bg-brand-blue text-white hover:bg-brand-blue-light shadow-sm",
+      destructive: "bg-status-danger text-white hover:opacity-90",
+      outline: "border border-surface-border bg-white hover:bg-surface-soft text-text-primary",
+      secondary: "bg-surface-muted text-text-primary hover:bg-surface-border",
+      ghost: "hover:bg-surface-soft text-text-primary",
+      link: "text-brand-teal underline-offset-4 hover:underline",
+      teal: "bg-brand-teal text-white hover:bg-brand-teal-dark shadow-sm",
+      primary: "bg-brand-blue text-white hover:bg-brand-blue-light shadow-sm",
     };
 
     const sizes = {
-      xs: "h-7 px-3 text-xs rounded-lg",
-      sm: "h-9 px-4 text-sm",
-      md: "h-11 px-6 text-sm",
-      lg: "h-12 px-8 text-base",
-      xl: "h-14 px-10 text-lg",
+      default: "h-10 px-4 py-2",
+      sm: "h-9 rounded-md px-3",
+      md: "h-10 rounded-md px-4 py-2",
+      lg: "h-11 rounded-md px-8",
+      xl: "h-14 rounded-xl px-10 text-base font-bold",
+      icon: "h-10 w-10",
     };
 
     return (
-      <button
-        ref={ref}
+      <Comp
         className={cn(
-          base,
+          "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          fullWidth && "w-full",
           variants[variant],
           sizes[size],
-          fullWidth && "w-full",
           className
         )}
-        disabled={disabled || loading}
+        ref={ref}
         {...props}
       >
-        {loading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : (
-          leftIcon
-        )}
+        {leftIcon && <span className="mr-2">{leftIcon}</span>}
         {children}
-        {!loading && rightIcon}
-      </button>
+        {rightIcon && <span className="ml-2">{rightIcon}</span>}
+      </Comp>
     );
   }
 );
-
 Button.displayName = "Button";
+
+export { Button };
 export default Button;

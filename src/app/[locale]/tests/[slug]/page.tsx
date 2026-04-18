@@ -75,7 +75,7 @@ export default async function TestDetailPage({ params }: PageProps) {
     }
   };
 
-  const relatedTests = test.relatedTests
+  const relatedTests = (test.relatedTests || [])
     .map((slug) => getTestBySlug(slug))
     .filter((t): t is any => !!t)
     .slice(0, 3);
@@ -261,14 +261,14 @@ export default async function TestDetailPage({ params }: PageProps) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-surface-border">
-                    {test.parameters.map((param, i) => (
+                    {test.parameters?.map((param, i) => (
                       <tr key={i} className="hover:bg-brand-teal-pale/30 transition-colors">
                         <td className="px-4 py-3.5 text-sm font-semibold text-text-primary">{param.name}</td>
                         <td className="px-4 py-3.5 text-sm text-text-secondary font-mono">{param.normalRange || "N/A"}</td>
                         <td className="px-4 py-3.5 text-sm text-text-muted">{param.unit || "-"}</td>
                       </tr>
                     ))}
-                    {test.parameterCount > test.parameters.length && (
+                    {test.parameters && test.parameterCount > test.parameters.length && (
                       <tr>
                         <td colSpan={3} className="px-4 py-3 text-center bg-surface-soft text-xs text-text-muted italic">
                           + {test.parameterCount - test.parameters.length} additional internal markers
@@ -297,7 +297,7 @@ export default async function TestDetailPage({ params }: PageProps) {
                   <div className="bg-surface-soft rounded-2xl p-5 border-l-4 border-brand-teal">
                     <h4 className="font-bold text-brand-teal text-sm uppercase tracking-wider mb-2">Who should take this?</h4>
                     <ul className="space-y-2">
-                      {test.whoShouldTake.map((item, i) => (
+                      {test.whoShouldTake?.map((item, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm">
                           <span className="w-1.5 h-1.5 rounded-full bg-brand-teal mt-1.5 flex-shrink-0" />
                           {item}

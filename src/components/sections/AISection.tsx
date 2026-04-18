@@ -94,7 +94,7 @@ export default function AISection() {
           </div>
 
           {/* Right: Feature Image */}
-          <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square xl:aspect-[4/3] rounded-[2rem] overflow-hidden shadow-modal opacity-0 animate-[fadeIn_0.8s_ease-out_0.6s_forwards]">
+          <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square xl:aspect-[4/3] rounded-[2rem] overflow-hidden shadow-modal opacity-0 animate-fade-in [animation-delay:0.6s]">
             <Image 
               src="/images/smartlab_image_3.png" 
               alt="SMARTLAB247 Features" 
@@ -104,12 +104,6 @@ export default function AISection() {
           </div>
         </div>
       </div>
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-      `}</style>
     </section>
   );
 }

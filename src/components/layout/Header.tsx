@@ -10,6 +10,8 @@ import { CONTACT } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import { useSession, signOut } from "next-auth/react";
+import { UserCircle2, LogOut, LayoutDashboard } from "lucide-react";
 
 const NAV_ITEMS = [
   { label: "Tests", href: "/tests" },
@@ -33,22 +35,23 @@ const CITIES = [
 
 export default function Header() {
   const t = useTranslations("Header");
+  const { data: session, status } = useSession();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cartCount] = useState(0);
   const [selectedCity, setSelectedCity] = useState("Kolkata");
   const [cityOpen, setCityOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full">
-      {/* Main header */}
+      {/* ... prev lines ... */}
       <div className="glass border-b border-surface-border shadow-card">
+        {/* ... container ... */}
         <div className="container-site">
           <div className="flex items-center gap-4 h-16">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
-              <Logo size="md" />
-            </Link>
+            <Logo size="md" />
 
             {/* City selector */}
             <div className="relative hidden md:block">
@@ -143,7 +146,7 @@ export default function Header() {
                 )
               )}
             </nav>
-
+            
             {/* Right actions */}
             <div className="flex items-center gap-2 ml-auto lg:ml-0">
               {/* Language Switcher */}
@@ -157,14 +160,13 @@ export default function Header() {
                 className="hidden lg:flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-brand-blue transition-colors px-2 py-1.5 rounded-lg hover:bg-surface-soft"
               >
                 <Phone size={15} />
-                <span>{CONTACT.phone_display}</span>
+                <span className="hidden xl:inline">{CONTACT.phone_display}</span>
               </a>
 
               {/* Cart */}
               <Link
                 href="/cart"
                 className="relative p-2 rounded-lg hover:bg-surface-soft transition-colors text-text-secondary hover:text-brand-blue"
-                aria-label={`Cart${cartCount > 0 ? `, ${cartCount} items` : ""}`}
               >
                 <ShoppingCart size={20} />
                 {cartCount > 0 && (
@@ -174,10 +176,55 @@ export default function Header() {
                 )}
               </Link>
 
-              {/* Book Now CTA */}
-              <Button size="sm" variant="secondary" className="hidden sm:flex">
-                Book Now
-              </Button>
+              {/* Auth Logic */}
+              <div className="hidden md:flex items-center gap-2">
+                {status === "authenticated" ? (
+                  <div className="relative">
+                    <button 
+                      onClick={() => setUserMenuOpen(!userMenuOpen)}
+                      className="flex items-center gap-2 p-1 pl-3 pr-2 bg-surface-soft border border-surface-border rounded-full hover:border-brand-blue transition-all group"
+                    >
+                      <span className="text-xs font-bold text-text-primary px-1">{session.user?.name?.split(' ')[0]}</span>
+                      <div className="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center text-xs font-bold shadow-sm group-hover:bg-brand-blue-dark transition-colors">
+                        {session.user?.name?.substring(0, 1).toUpperCase() || "U"}
+                      </div>
+                    </button>
+                    
+                    {userMenuOpen && (
+                      <div className="absolute top-full right-0 mt-2 bg-white border border-surface-border rounded-2xl shadow-modal min-w-48 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-300">
+                        <Link 
+                          href="/dashboard"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-text-primary hover:bg-surface-soft transition-colors"
+                        >
+                          <LayoutDashboard size={16} className="text-brand-blue" />
+                          <span>My Dashboard</span>
+                        </Link>
+                        <button 
+                          onClick={() => signOut()}
+                          className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-status-danger hover:bg-red-50 transition-colors border-t border-surface-border mt-1 pt-3"
+                        >
+                          <LogOut size={16} />
+                          <span>Sign Out</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <>
+                    <Link href="/login">
+                      <Button variant="outline" size="sm" className="rounded-xl border-surface-border hover:bg-surface-soft">
+                        Login
+                      </Button>
+                    </Link>
+                    <Link href="/signup">
+                      <Button variant="secondary" size="sm" className="rounded-xl bg-brand-blue text-white hover:bg-brand-blue-dark border-brand-blue shadow-sm">
+                        Join Now
+                      </Button>
+                    </Link>
+                  </>
+                )}
+              </div>
 
               {/* Mobile menu toggle */}
               <button

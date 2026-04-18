@@ -13,8 +13,14 @@ interface PackageCardProps {
   featured?: boolean;
 }
 
-const GENDER_LABEL = { all: "For Everyone", male: "For Men", female: "For Women" };
-const GENDER_COLOR = { all: "text-brand-teal", male: "text-blue-600", female: "text-pink-600" };
+const GENDER_LABEL: Record<string, string> = { 
+  all: "For Everyone", male: "For Men", female: "For Women",
+  ALL: "For Everyone", MALE: "For Men", FEMALE: "For Women" 
+};
+const GENDER_COLOR: Record<string, string> = { 
+  all: "text-brand-teal", male: "text-blue-600", female: "text-pink-600",
+  ALL: "text-brand-teal", MALE: "text-blue-600", FEMALE: "text-pink-600"
+};
 
 export default function PackageCard({ pkg, featured = false }: PackageCardProps) {
   const [added, setAdded] = useState(false);
@@ -88,7 +94,7 @@ export default function PackageCard({ pkg, featured = false }: PackageCardProps)
                 Home Collection
               </span>
             )}
-            <FastingBadge required={pkg.fasting} hours={pkg.fastingHours} />
+            <FastingBadge required={pkg.fasting} hours={pkg.fastingHours ?? undefined} />
             {pkg.membershipEligible && (
               <span className="flex items-center gap-1 text-[11px] text-brand-teal font-semibold bg-brand-teal-pale rounded-full px-2 py-0.5">
                 <Star size={11} />

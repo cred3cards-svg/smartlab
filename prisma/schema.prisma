@@ -10,7 +10,10 @@ datasource db {
 
 enum UserRole {
   ADMIN
+  SUPER_ADMIN
   OPERATIONS
+  CONTENT
+  SUPPORT
   PATHOLOGIST
   PATIENT
 }
@@ -40,6 +43,14 @@ enum ReportStatus {
   GENERATING
   VERIFIED
   PUBLISHED
+  CANCELLED
+}
+
+enum AiStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  STALE
 }
 
 enum SampleType {
@@ -82,10 +93,25 @@ model AdminUser {
   email     String   @unique
   password  String
   name      String
-  role      UserRole @default(ADMIN)
+  role      UserRole @default(SUPER_ADMIN)
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  userEmail  String?
+  action     String // CREATE, UPDATE, DELETE, LOGIN, etc.
+  entityType String // Test, Booking, Coupon, etc.
+  entityId   String?
+  oldDetails Json?
+  newDetails Json?
+  ipAddress  String?
+  userAgent  String?
+  timestamp  DateTime @default(now())
+  metadata   Json? // For extra context
 }
 
 model City {
@@ -320,15 +346,34 @@ model MembershipSubscription {
 }
 
 model TestReport {
-  id           String       @id @default(cuid())
-  bookingId    String
-  booking      TestBooking  @relation(fields: [bookingId], references: [id])
-  reportUrl    String
-  status       ReportStatus @default(PENDING)
+  id            String       @id @default(cuid())
+  bookingId     String
+  booking       TestBooking  @relation(fields: [bookingId], references: [id])
+  reportUrl     String
+  status        ReportStatus @default(PENDING)
   pathologistId String?
-  verifiedAt   DateTime?
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  verifiedAt    DateTime?
+  
+  // Intelligence Fields
+  structuredData Json?      // e.g. { "HbA1c": 6.4, "Glucose": 105 }
+  isRead         Boolean    @default(false)
+
+  // AI Enrichment Fields
+  aiStatus          AiStatus @default(PENDING)
+  summaryEn         String?  @db.Text
+  summaryHi         String?  @db.Text
+  summaryBn         String?  @db.Text
+  abnormalAnalysis  Json?    // Array of { name, explanation, status, organ }
+  bodyMapping       Json?    // Array of { organ, status, details }
+  recommendations   Json?    // Array of { title, description, reason }
+  lifestyleGuidance Json?    // Array of { category, advice }
+  recheckInterval   String?
+  videoScript       String?  @db.Text
+  promptVersion     String?  @default("1.0.0")
+  aiModel           String?  @default("gpt-4o")
+
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
 model FAQ {
@@ -396,6 +441,9 @@ model PatientAccount {
   phone           String        @unique
   email           String?
   name            String?
+  password        String?       // For authentication
+  role            UserRole      @default(PATIENT)
+  active          Boolean       @default(true)
   referralCode    ReferralCode?
   referralsMade   ReferralEvent[] @relation("Referrer")
   referralsGained ReferralEvent[] @relation("ReferredUser")

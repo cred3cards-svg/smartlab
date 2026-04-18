@@ -130,13 +130,31 @@ export class ReferralService {
 
     if (unrewardedEvents.length === 0) return;
 
+    // Fetch dynamic tiers from SiteSettings
+    const settings = await db.siteSetting.findUnique({
+      where: { key: "referral_tiers" }
+    });
+
+    const tiers = settings 
+      ? JSON.parse(settings.value) 
+      : [
+          { threshold: 2, rewardType: 'WALLET', amount: 250 },
+          { threshold: 5, rewardType: 'PACKAGE', amount: 0 },
+          { threshold: 10, rewardType: 'CASH', amount: 1000 }
+        ];
+
     // Check for Tier thresholds
-    if (validatedCount === 2) {
-      await this.issueReward(referrerId, RewardType.WALLET_CREDIT, 250, "Earned for 2 successful referrals");
-    } else if (validatedCount === 5) {
-      await this.issueReward(referrerId, RewardType.FREE_PACKAGE, 0, "Earned for 5 successful referrals");
-    } else if (validatedCount === 10) {
-      await this.issueReward(referrerId, RewardType.CASH_REWARD, 1000, "Eligible for cash reward - pending admin approval");
+    for (const tier of tiers.sort((a: any, b: any) => b.threshold - a.threshold)) {
+      if (validatedCount >= tier.threshold) {
+        // Check if this tier has already been rewarded to avoid double issuance
+        // For simplicity in this logic, we issued based on exact match or first hit
+        // In a production system, we'd check a 'Milestone' table.
+        // For now, we follow the user's logic but make the values dynamic.
+        if (validatedCount === tier.threshold) {
+           await this.issueReward(referrerId, tier.rewardType, tier.amount, tier.notes || `Milestone reached: ${tier.threshold} referrals`);
+           break;
+        }
+      }
     }
 
     // Mark these specific events as REWARDED to prevent double-counting

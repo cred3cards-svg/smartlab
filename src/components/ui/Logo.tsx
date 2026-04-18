@@ -7,6 +7,7 @@ interface LogoProps {
   size?: "sm" | "md" | "lg" | "xl";
   className?: string;
   href?: string;
+  noLink?: boolean;
 }
 
 /**
@@ -19,6 +20,7 @@ export function Logo({
   size = "md",
   className,
   href = "/",
+  noLink = false,
 }: LogoProps) {
   // Height mapping based on size prop
   const heights = {
@@ -54,7 +56,7 @@ export function Logo({
     </div>
   );
 
-  if (href) {
+  if (href && !noLink) {
     return (
       <Link href={href} className="inline-block transition-opacity hover:opacity-90">
         {content}

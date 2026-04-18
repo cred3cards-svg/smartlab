@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
 
@@ -26,6 +25,7 @@ declare global {
 
 const db = globalThis.prisma ?? prismaClientSingleton();
 
+export const prisma = db;
 export default db;
 
 if (process.env.NODE_ENV !== "production") globalThis.prisma = db;

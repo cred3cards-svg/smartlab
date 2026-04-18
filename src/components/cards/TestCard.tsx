@@ -70,7 +70,7 @@ export default function TestCard({ test, compact = false }: TestCardProps) {
               Home
             </span>
           )}
-          <FastingBadge required={test.fasting} hours={test.fastingHours} />
+          <FastingBadge required={test.fasting} hours={test.fastingHours ?? undefined} />
         </div>
 
         {/* Parameters */}

@@ -28,20 +28,20 @@ export interface Test {
   reportTime: string;
   homeCollection: boolean;
   fasting: boolean;
-  fastingHours?: number;
+  fastingHours?: number | null;
   sampleType: string;
-  parameters: Parameter[];
+  parameters?: Parameter[];
   parameterCount: number;
   categories: string[];
-  organCategory: string;
+  organCategory?: string | null;
   preparation: string[];
-  whoShouldTake: string[];
-  whyImportant: string;
-  labDetails: string;
+  whoShouldTake?: string[];
+  whyImportant?: string | null;
+  labDetails?: string | null;
   popular: boolean;
   isNew: boolean;
-  faqs: FAQ[];
-  relatedTests: string[];
+  faqs?: FAQ[];
+  relatedTests?: string[];
 }
 
 export interface Package {
@@ -55,20 +55,20 @@ export interface Package {
   reportTime: string;
   homeCollection: boolean;
   fasting: boolean;
-  fastingHours?: number;
+  fastingHours?: number | null;
   parameterCount: number;
   testCount: number;
-  includedTests: string[];
-  parameterGroups: ParameterGroup[];
-  gender: "all" | "male" | "female";
-  ageGroup: string;
+  includedTests?: string[];
+  parameterGroups?: ParameterGroup[];
+  gender: "all" | "male" | "female" | "ALL" | "MALE" | "FEMALE" | "OTHER";
+  ageGroup: string | null;
   purpose: string[];
   popular: boolean;
   recommended: boolean;
   membershipEligible: boolean;
   preparation: string[];
-  frequency: string;
-  faqs: FAQ[];
+  frequency?: string | null;
+  faqs?: FAQ[];
 }
 
 export interface City {

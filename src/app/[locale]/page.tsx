@@ -10,6 +10,7 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CitiesSection from "@/components/sections/CitiesSection";
 import FAQPreview from "@/components/sections/FAQPreview";
 import AppSection from "@/components/sections/AppSection";
+import SignupPromo from "@/components/sections/SignupPromo";
 import Script from "next/script";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -46,10 +47,8 @@ const organizationSchema = {
   ],
 };
 
-import { useTranslations } from "next-intl";
 
 export default function Home() {
-  const tCommon = useTranslations("Common");
 
   return (
     <>
@@ -60,6 +59,7 @@ export default function Home() {
       />
 
       <Hero />
+      <SignupPromo />
       <TrustStrip />
       <CategorySection />
       <FeaturedSection />

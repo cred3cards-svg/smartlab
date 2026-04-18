@@ -168,12 +168,25 @@ export class BookingService {
   static async updateBookingStatus(id: string, status: BookingStatus) {
     const updated = await db.testBooking.update({
       where: { id },
-      data: { status }
+      data: { status },
+      include: { reports: true }
     });
 
     // Trigger Referral Processing if delivered
     if (status === BookingStatus.DELIVERED) {
       await ReferralService.processBookingCompletion(id);
+    }
+
+    // Trigger AI Enrichment if report is ready
+    if (status === BookingStatus.REPORT_READY && updated.reports.length > 0) {
+      // Import dynamically to avoid circular dependencies if any
+      const { AiService } = await import("./ai.service");
+      // Process each report in the background
+      for (const report of updated.reports) {
+        AiService.enrichReport(report.id).catch(err => {
+          console.error(`[BookingService] AI Enrichment failed for report ${report.id}:`, err);
+        });
+      }
     }
 
     return updated;

@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronRight, SlidersHorizontal, Search } from "lucide-react";
-import { PACKAGES } from "@/data/packages";
+import { Search, ChevronRight, Activity, Zap, Sun, Droplets, Filter, SlidersHorizontal } from "lucide-react";
+import { prisma } from "@/lib/db";
+import { PackageService } from "@/services/package.service";
 import PackageCard from "@/components/cards/PackageCard";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Health Checkup Packages in Kolkata — Full Body Checkups Online",
+  title: "Full Body Checkups in Kolkata — Health Packages | SMARTLAB247",
   description:
-    "Book comprehensive health checkup packages online in Kolkata. Full body checkup, women's wellness, cardiac risk, and more. Home sample collection. Up to 75% off.",
+    "Explore comprehensive health screening packages in Kolkata. Preventive full body checkups starting at ₹1599. NABL-certified reports with AI insights.",
 };
 
 const FILTER_TABS = [
@@ -23,7 +24,9 @@ const FILTER_TABS = [
 const GENDER_FILTERS = ["All", "Men", "Women"];
 const BUDGET_FILTERS = ["Under ₹500", "₹500–₹1,000", "₹1,000–₹2,000", "₹2,000+"];
 
-export default function CheckupsPage() {
+export default async function CheckupsPage() {
+  const packages = await PackageService.getAllPackages();
+
   return (
     <>
       {/* Page hero */}
@@ -127,7 +130,7 @@ export default function CheckupsPage() {
           <main className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-6">
               <p className="text-sm text-text-muted">
-                <span className="font-semibold text-text-primary">{PACKAGES.length} packages</span> available
+                <span className="font-semibold text-text-primary">{packages.length} packages</span> available
               </p>
               <select className="text-sm border border-surface-border rounded-xl px-3 py-2 bg-white focus:outline-none focus:border-brand-teal">
                 <option>Sort: Recommended</option>
@@ -139,7 +142,7 @@ export default function CheckupsPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-              {PACKAGES.map((pkg, i) => (
+              {packages.map((pkg, i) => (
                 <PackageCard key={pkg.id} pkg={pkg} featured={pkg.popular} />
               ))}
             </div>
