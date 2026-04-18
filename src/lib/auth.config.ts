@@ -1,5 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
-import { UserRole } from "@prisma/client";
+
+// Define role type manually to avoid importing from @prisma/client in middleware
+type UserRole = "ADMIN" | "PATIENT";
 
 export const authConfig = {
   pages: {
@@ -32,5 +34,5 @@ export const authConfig = {
       return true;
     },
   },
-  providers: [], // Add providers with an empty array for now, will be populated in auth.ts
+  providers: [],
 } satisfies NextAuthConfig;
