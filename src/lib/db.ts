@@ -4,11 +4,11 @@ import { PrismaNeon } from "@prisma/adapter-neon";
 const prismaClientSingleton = () => {
   const connectionString = process.env.DATABASE_URL;
   
-  // If no connection string, return a dummy-ish client that will fail on use
-  // but won't crash the entire initialization process during build or static analysis
+  // If no connection string, return a client with a placeholder to prevent build-time crashes.
   if (!connectionString) {
     console.warn("⚠️ DATABASE_URL not set. Database operations will fail.");
     return new PrismaClient({
+      // @ts-ignore - Placeholder for build-time static analysis
       datasourceUrl: "postgresql://placeholder:placeholder@localhost:5432/placeholder"
     });
   }
