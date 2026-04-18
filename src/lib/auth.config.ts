@@ -1,29 +1,26 @@
-import type { NextAuthConfig } from "next-auth";
-
-// Define role type manually to avoid importing from @prisma/client in middleware
-type UserRole = "ADMIN" | "PATIENT";
-
+// Edge-compatible auth configuration
+// We avoid importing NextAuthConfig or anything from next-auth here to keep it truly lightweight for Middleware
 export const authConfig = {
   pages: {
     signIn: "/admin/login",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: any) {
       if (user) {
-        token.role = (user as any).role;
+        token.role = user.role;
         token.sub = user.id;
         token.name = user.name;
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       if (token && session.user) {
-        (session.user as any).role = token.role as UserRole;
-        (session.user as any).id = token.sub as string;
+        session.user.role = token.role;
+        session.user.id = token.sub;
       }
       return session;
     },
-    authorized({ auth, request: { nextUrl } }) {
+    authorized({ auth, request: { nextUrl } }: any) {
       const isLoggedIn = !!auth?.user;
       const isAdminRoute = nextUrl.pathname.startsWith("/admin");
       
@@ -35,4 +32,4 @@ export const authConfig = {
     },
   },
   providers: [],
-} satisfies NextAuthConfig;
+};
