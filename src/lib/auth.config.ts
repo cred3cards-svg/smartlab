@@ -1,5 +1,5 @@
-// Edge-compatible auth configuration
-// We avoid importing NextAuthConfig or anything from next-auth here to keep it truly lightweight for Middleware
+import type { NextAuthConfig } from "next-auth";
+
 export const authConfig = {
   pages: {
     signIn: "/admin/login",
@@ -31,5 +31,5 @@ export const authConfig = {
       return true;
     },
   },
-  providers: [],
-};
+  providers: [], // Providers added in auth.ts
+} satisfies NextAuthConfig;

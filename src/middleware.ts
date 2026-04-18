@@ -1,23 +1,21 @@
 import createMiddleware from 'next-intl/middleware';
 import {routing} from './i18n/routing';
-import { NextResponse, NextRequest } from 'next/server';
+import NextAuth from "next-auth";
+import { authConfig } from "./lib/auth.config";
+import { NextResponse } from 'next/server';
 
+// Initialize NextAuth with the lightweight config
+const { auth } = NextAuth(authConfig);
 const intlMiddleware = createMiddleware(routing);
 
-export default function middleware(req: NextRequest) {
+export default auth((req) => {
+  const isAuth = !!req.auth;
   const { pathname } = req.nextUrl;
 
-  // 1. Handle Admin Routes with Lightweight Cookie Check
-  // This bypasses the heavy NextAuth runtime in the Edge environment
+  // 1. Handle Admin Route Protection
+  // NextAuth 'auth' wrapper handles session cookie verification automatically
   if (pathname.startsWith('/admin')) {
     const isLoginPage = pathname === '/admin/login';
-    
-    // Check for NextAuth session cookie
-    // In production (HTTPS), it's usually prefixed with __Secure-
-    const sessionToken = req.cookies.get('__Secure-next-auth.session-token') || 
-                        req.cookies.get('next-auth.session-token');
-    
-    const isAuth = !!sessionToken;
     
     if (!isAuth && !isLoginPage) {
       return NextResponse.redirect(new URL('/admin/login', req.url));
@@ -30,12 +28,11 @@ export default function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // 2. Handle Public Multilingual Routes
+  // 2. Handle Multilingual Routes for all other pages
   return intlMiddleware(req);
-}
+});
 
 export const config = {
-  // Match only internationalized pathnames and admin routes
   matcher: [
     '/', 
     '/(hi|en|bn)/:path*',
